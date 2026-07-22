@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+/* Brand tokens from docs/Fund_Patients_Cheatsheet.pdf. Single light theme for
+   now — the cheatsheet doesn't define a dark palette. Every component should
+   read color via these variables / the generated Tailwind utilities below,
+   never a hardcoded hex, so the palette stays driven by one source of truth. */
+:root {
+  --background: #ffffff;
+  --foreground: #0b1f0e; /* Forest Night — primary text on light */
+
+  --brand-forest: #0b1f0e; /* Dark bg, primary text on light */
+  --brand-deep-green: #1a6b2a; /* Primary brand, CTAs, links */
+  --brand-mint: #6ee07a; /* Hover states */
+  --brand-muted-sage: #6b7c6e; /* Body text, secondary copy */
+  --brand-soft-sage: #e4f7e6; /* Tinted backgrounds, pills */
+
+  --muted: var(--brand-muted-sage);
+  --border: rgba(11, 31, 14, 0.1);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-brand-forest: var(--brand-forest);
+  --color-brand-deep-green: var(--brand-deep-green);
+  --color-brand-mint: var(--brand-mint);
+  --color-brand-muted-sage: var(--brand-muted-sage);
+  --color-brand-soft-sage: var(--brand-soft-sage);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --font-sans: var(--font-dm-sans);
+  --font-display: var(--font-bricolage);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: var(--brand-deep-green);
+}
