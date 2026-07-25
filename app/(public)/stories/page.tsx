@@ -1,10 +1,14 @@
-import Link from "next/link";
 import { listPublishedCases } from "@/lib/cases";
-import { formatCurrency } from "@/lib/formatCurrency";
+import { CaseCard } from "@/components/public/CaseCard";
 
 export const metadata = { title: "Stories" };
 
-export default async function StoriesPage() {
+export default async function StoriesPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ recurring?: string }>;
+}) {
+  const { recurring } = await searchParams;
   const cases = await listPublishedCases();
 
   return (
@@ -19,17 +23,7 @@ export default async function StoriesPage() {
       ) : (
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {cases.map((c) => (
-            <Link
-              key={c.id}
-              href={`/stories/${c.id}`}
-              className="flex flex-col gap-2 rounded-lg border border-border p-4 hover:border-brand-deep-green"
-            >
-              <p className="text-sm text-brand-deep-green">
-                {formatCurrency(c.amount_raised, c.currency)} raised
-              </p>
-              <h2 className="font-display text-lg font-semibold text-brand-forest">{c.title}</h2>
-              <p className="line-clamp-3 text-sm text-brand-muted-sage">{c.description}</p>
-            </Link>
+            <CaseCard key={c.id} case={c} recurring={recurring === "true"} />
           ))}
         </div>
       )}

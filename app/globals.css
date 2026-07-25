@@ -6,6 +6,7 @@
    never a hardcoded hex, so the palette stays driven by one source of truth. */
 :root {
   --background: #ffffff;
+  --page-background: #f7f7f6; /* Subtle gray behind white cards/panels */
   --foreground: #0b1f0e; /* Forest Night — primary text on light */
 
   --brand-forest: #0b1f0e; /* Dark bg, primary text on light */
@@ -33,11 +34,48 @@
 }
 
 body {
-  background: var(--background);
+  background: var(--page-background);
   color: var(--foreground);
 }
 
 input[type="checkbox"],
 input[type="radio"] {
   accent-color: var(--brand-deep-green);
+}
+
+@layer base {
+  h1,
+  h2 {
+    letter-spacing: -0.075rem;
+  }
+
+  h1 {
+    font-size: 3.75rem;
+    line-height: 1.1;
+  }
+
+  h2 {
+    font-size: 3rem;
+    line-height: 1.1;
+  }
+
+  h3 {
+    font-size: 2.25rem;
+    line-height: 1.15;
+  }
+
+  h4 {
+    font-size: 1.75rem;
+    line-height: 1.2;
+  }
+
+  h5 {
+    font-size: 1.5rem;
+    line-height: 1.25;
+  }
+
+  h6 {
+    font-size: 1rem;
+    line-height: 1.4;
+  }
 }

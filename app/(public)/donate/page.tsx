@@ -8,9 +8,9 @@ export const metadata = { title: "Donate" };
 export default async function DonatePage({
   searchParams,
 }: {
-  searchParams: Promise<{ case?: string }>;
+  searchParams: Promise<{ case?: string; recurring?: string }>;
 }) {
-  const { case: caseId } = await searchParams;
+  const { case: caseId, recurring } = await searchParams;
   if (!caseId) notFound();
 
   const activeCase = await getCaseById(caseId);
@@ -28,7 +28,11 @@ export default async function DonatePage({
         {formatCurrency(activeCase.goal_amount, activeCase.currency)}
       </p>
 
-      <DonateForm caseId={activeCase.id} defaultCurrency={activeCase.currency as "NGN" | "USD" | "EUR"} />
+      <DonateForm
+        caseId={activeCase.id}
+        defaultCurrency={activeCase.currency as "NGN" | "USD" | "EUR"}
+        defaultRecurring={recurring === "true"}
+      />
     </main>
   );
 }

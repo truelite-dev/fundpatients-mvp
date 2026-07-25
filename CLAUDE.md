@@ -24,6 +24,17 @@ Sourced from `docs/Fund_Patients_Cheatsheet.pdf` (brand cheatsheet). Defined in 
 
 Final page-level visual design is pending a Figma UI file — until it lands, pages should stay functionally correct with minimal/placeholder styling rather than being polished against guesswork.
 
+## Planning docs
+
+Feature plans (from Claude Code's plan mode) get written to `docs/fundpatient-<feature>.md` (e.g. `docs/fundpatient-homepage.md`, `docs/fundpatient-stories-page.md`) instead of only living in the ephemeral, single-slot plan-mode file — that file gets overwritten every time a new plan is drafted, so anything worth keeping needs to land here. Write/update the relevant `docs/fundpatient-*.md` as the durable copy once a plan is agreed, alongside (not instead of) the plan-mode file.
+
+## Animations
+
+New pages and page components should always get animated by default — scroll-reveal on entry and an animated page transition, not static markup. Reuse the shared primitives rather than one-off `motion/react` code per component:
+
+- `components/motion/Reveal.tsx` — wraps a section/item in a fade+slide-up-on-scroll-into-view animation (`whileInView`, once). Use for page sections and staggered list/grid items (pass an index-based `delay`).
+- `components/motion/PageTransition.tsx` — wraps route `template.tsx` files (see `app/(public)/template.tsx`, `app/(auth)/template.tsx`) so page content fades/slides in on every navigation, without re-animating the persistent header/footer. Add a `template.tsx` for any new route group the same way.
+
 ## Route structure
 
 ```

@@ -7,10 +7,18 @@ type Currency = (typeof currencies)[number];
 
 const tipPresets = [5, 10, 15] as const;
 
-export function DonateForm({ caseId, defaultCurrency }: { caseId: string; defaultCurrency: Currency }) {
+export function DonateForm({
+  caseId,
+  defaultCurrency,
+  defaultRecurring = false,
+}: {
+  caseId: string;
+  defaultCurrency: Currency;
+  defaultRecurring?: boolean;
+}) {
   const [currency, setCurrency] = useState<Currency>(defaultCurrency);
   const [amount, setAmount] = useState("");
-  const [isRecurring, setIsRecurring] = useState(false);
+  const [isRecurring, setIsRecurring] = useState(defaultRecurring);
   const [tipPercent, setTipPercent] = useState<number | null>(10);
   const [donorName, setDonorName] = useState("");
   const [donorEmail, setDonorEmail] = useState("");

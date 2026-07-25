@@ -1,13 +1,35 @@
-export default function Home() {
+import { HeroCarousel } from "@/components/public/home/HeroCarousel";
+import { WaysToDonate } from "@/components/public/home/WaysToDonate";
+import { StoriesPreview } from "@/components/public/home/StoriesPreview";
+import { HowItWorks } from "@/components/public/home/HowItWorks";
+import { Testimonials } from "@/components/public/home/Testimonials";
+import { PartnerCTA } from "@/components/public/home/PartnerCTA";
+import { Reveal } from "@/components/motion/Reveal";
+import { listTopCases } from "@/lib/cases";
+
+export default async function Home() {
+  const topCases = await listTopCases(5);
+
   return (
-    <main className="flex flex-1 flex-col items-center justify-center gap-4 px-6 py-32 text-center">
-      <h1 className="font-display text-4xl font-semibold text-brand-forest sm:text-5xl">
-        Every Life <span className="text-brand-deep-green">Matters.</span>
-      </h1>
-      <p className="max-w-md text-brand-muted-sage">
-        Directly support individuals facing urgent medical expenses and help them access vital
-        care.
-      </p>
+    <main className="flex flex-1 flex-col">
+      <div className="pt-5">
+        <HeroCarousel cases={topCases} />
+      </div>
+      <Reveal>
+        <WaysToDonate />
+      </Reveal>
+      <Reveal>
+        <StoriesPreview />
+      </Reveal>
+      <Reveal>
+        <HowItWorks />
+      </Reveal>
+      <Reveal>
+        <Testimonials />
+      </Reveal>
+      <Reveal>
+        <PartnerCTA />
+      </Reveal>
     </main>
   );
 }

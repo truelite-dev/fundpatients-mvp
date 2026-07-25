@@ -23,6 +23,21 @@ export async function listPublishedCases() {
   return data as CaseSummary[];
 }
 
+// "Top" = highest amount raised among published cases — the closest proxy to
+// "featured" until an admin CMS adds a real curation flag.
+export async function listTopCases(limit = 3) {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("cases")
+    .select("id, title, description, goal_amount, currency, amount_raised, cover_image_url, location")
+    .in("status", ["published", "fully_funded"])
+    .order("amount_raised", { ascending: false })
+    .limit(limit);
+
+  if (error) throw error;
+  return data as CaseSummary[];
+}
+
 export async function getCaseById(id: string) {
   const supabase = await createClient();
   const { data, error } = await supabase
