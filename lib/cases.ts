@@ -54,17 +54,24 @@ export async function listAlmostFundedCases(limit = 5) {
     .slice(0, limit);
 }
 
-export async function getCaseById(id: string) {
+export type CaseDetail = CaseSummary & {
+  status: string;
+  published_at: string | null;
+  supporter_count: number;
+  organizations: { name: string; specialization: string | null } | null;
+};
+
+export async function getCaseById(id: string): Promise<CaseDetail | null> {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("cases")
     .select(
-      "id, title, description, goal_amount, currency, amount_raised, cover_image_url, location, published_at, status"
+      "id, title, description, goal_amount, currency, amount_raised, cover_image_url, location, published_at, status, supporter_count, organizations(name, specialization)"
     )
     .eq("id", id)
     .in("status", ["published", "fully_funded", "closed"])
     .maybeSingle();
 
   if (error) throw error;
-  return data;
+  return data as CaseDetail | null;
 }
