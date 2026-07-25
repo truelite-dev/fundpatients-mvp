@@ -122,16 +122,16 @@ export function HeroCarousel({ cases }: { cases: CaseSummary[] }) {
           <p className="mt-4 max-w-md text-base leading-relaxed text-brand-soft-sage/90 sm:text-xl">
             Discover a supportive platform for medical fundraising and get the care you deserve.
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link
               href="/stories"
-              className="rounded-full bg-brand-mint px-6 py-3 font-medium text-brand-forest transition hover:bg-white"
+              className="rounded-full bg-brand-mint px-6 py-3 text-center font-medium text-brand-forest transition hover:bg-white sm:w-auto"
             >
               Donate now
             </Link>
             <Link
               href="/request-help"
-              className="rounded-full border border-white/30 px-6 py-3 font-medium text-white transition hover:bg-white/10"
+              className="rounded-full border border-white/30 px-6 py-3 text-center font-medium text-white transition hover:bg-white/10 sm:w-auto"
             >
               Request help
             </Link>
