@@ -1,11 +1,17 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { listPublishedCases } from "@/lib/cases";
+import { listPublishedCases, listAlmostFundedCases } from "@/lib/cases";
 import { CaseCard } from "@/components/public/CaseCard";
+import { FeaturedCasesSlider } from "@/components/public/FeaturedCasesSlider";
 import { Reveal } from "@/components/motion/Reveal";
 
 export async function StoriesPreview() {
-  const cases = (await listPublishedCases()).slice(0, 6);
+  const [featuredCases, allCases] = await Promise.all([
+    listAlmostFundedCases(5),
+    listPublishedCases(),
+  ]);
+  const featuredIds = new Set(featuredCases.map((c) => c.id));
+  const cases = allCases.filter((c) => !featuredIds.has(c.id)).slice(0, 6);
 
   return (
     <section className="w-full bg-gradient-to-b from-white to-[var(--page-background)] py-28">
@@ -22,6 +28,12 @@ export async function StoriesPreview() {
             Support individuals facing urgent medical expenses and help them access vital care.
           </p>
         </div>
+
+        {featuredCases.length > 0 && (
+          <div className="mt-14">
+            <FeaturedCasesSlider cases={featuredCases} />
+          </div>
+        )}
 
         {cases.length === 0 ? (
           <p className="mt-14 text-center text-brand-muted-sage">

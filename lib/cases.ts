@@ -38,6 +38,22 @@ export async function listTopCases(limit = 3) {
   return data as CaseSummary[];
 }
 
+// Returns the `limit` published cases closest to their funding goal (by %).
+// Sorted in JS since Supabase JS client can't ORDER BY a computed ratio.
+export async function listAlmostFundedCases(limit = 5) {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("cases")
+    .select("id, title, description, goal_amount, currency, amount_raised, cover_image_url, location")
+    .eq("status", "published")
+    .gt("goal_amount", 0);
+
+  if (error) throw error;
+  return (data as CaseSummary[])
+    .sort((a, b) => b.amount_raised / b.goal_amount - a.amount_raised / a.goal_amount)
+    .slice(0, limit);
+}
+
 export async function getCaseById(id: string) {
   const supabase = await createClient();
   const { data, error } = await supabase
