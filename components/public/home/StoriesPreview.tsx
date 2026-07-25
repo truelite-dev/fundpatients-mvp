@@ -20,7 +20,7 @@ export async function StoriesPreview() {
           <p className="text-xs font-semibold tracking-widest text-brand-deep-green uppercase">
             Stories
           </p>
-          <h2 className="mt-2 font-display font-semibold text-brand-forest">
+          <h2 className="mt-2 font-display text-3xl font-semibold leading-tight text-brand-forest sm:text-4xl lg:text-5xl">
             Every Donation Makes a Difference.
             <br className="hidden sm:block" /> Every Life Matters.
           </h2>

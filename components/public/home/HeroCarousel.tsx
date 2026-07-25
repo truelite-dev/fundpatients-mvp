@@ -114,12 +114,12 @@ export function HeroCarousel({ cases }: { cases: CaseSummary[] }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
         >
-          <h1 className="font-display text-shadow-lg text-shadow-black/15 font-semibold text-white">
+          <h1 className="font-display text-shadow-lg text-shadow-black/15 text-4xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl">
             Don&apos;t Let Finances
             <br />
             Limit Your Fight.
           </h1>
-          <p className="mt-4 max-w-md text-lg leading-relaxed text-brand-soft-sage/90 sm:text-xl">
+          <p className="mt-4 max-w-md text-base leading-relaxed text-brand-soft-sage/90 sm:text-xl">
             Discover a supportive platform for medical fundraising and get the care you deserve.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
