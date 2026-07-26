@@ -3,7 +3,6 @@ import { WaysToDonate } from "@/components/public/home/WaysToDonate";
 import { StoriesPreview } from "@/components/public/home/StoriesPreview";
 import { HowItWorks } from "@/components/public/home/HowItWorks";
 import { Testimonials } from "@/components/public/home/Testimonials";
-import { PartnerCTA } from "@/components/public/home/PartnerCTA";
 import { Reveal } from "@/components/motion/Reveal";
 import { listTopCases } from "@/lib/cases";
 
@@ -26,9 +25,6 @@ export default async function Home() {
       </Reveal>
       <Reveal>
         <Testimonials />
-      </Reveal>
-      <Reveal>
-        <PartnerCTA />
       </Reveal>
     </main>
   );
