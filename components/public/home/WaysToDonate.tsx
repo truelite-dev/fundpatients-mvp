@@ -42,7 +42,7 @@ export function WaysToDonate() {
       />
       <div className="relative mx-auto w-full max-w-5xl px-6">
         <div className="text-center">
-          <h2 className="font-display font-semibold text-brand-forest">Ways to donate</h2>
+          <h2 className="font-display text-3xl font-semibold leading-tight text-brand-forest sm:text-4xl lg:text-5xl">Ways to donate</h2>
           <p className="mt-2 text-brand-muted-sage">
             Support individuals facing urgent medical expenses and help them access vital care.
           </p>

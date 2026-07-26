@@ -36,7 +36,7 @@ export function HowItWorks() {
           <p className="text-xs font-semibold tracking-widest text-brand-mint uppercase">
             How it works
           </p>
-          <h2 className="mt-3 font-display font-semibold text-white">
+          <h2 className="mt-3 font-display text-3xl font-semibold leading-tight text-white sm:text-4xl lg:text-5xl">
             Simple. Transparent. Impactful.
           </h2>
           <p className="mt-3 text-brand-soft-sage/70">

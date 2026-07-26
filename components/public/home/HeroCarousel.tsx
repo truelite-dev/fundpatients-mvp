@@ -114,24 +114,24 @@ export function HeroCarousel({ cases }: { cases: CaseSummary[] }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
         >
-          <h1 className="font-display text-shadow-lg text-shadow-black/15 font-semibold text-white">
+          <h1 className="font-display text-shadow-lg text-shadow-black/15 text-4xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl">
             Don&apos;t Let Finances
             <br />
             Limit Your Fight.
           </h1>
-          <p className="mt-4 max-w-md text-lg leading-relaxed text-brand-soft-sage/90 sm:text-xl">
+          <p className="mt-4 max-w-md text-base leading-relaxed text-brand-soft-sage/90 sm:text-xl">
             Discover a supportive platform for medical fundraising and get the care you deserve.
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link
               href="/stories"
-              className="rounded-full bg-brand-mint px-6 py-3 font-medium text-brand-forest transition hover:bg-white"
+              className="rounded-full bg-brand-mint px-6 py-3 text-center font-medium text-brand-forest transition hover:bg-white sm:w-auto"
             >
               Donate now
             </Link>
             <Link
               href="/request-help"
-              className="rounded-full border border-white/30 px-6 py-3 font-medium text-white transition hover:bg-white/10"
+              className="rounded-full border border-white/30 px-6 py-3 text-center font-medium text-white transition hover:bg-white/10 sm:w-auto"
             >
               Request help
             </Link>
