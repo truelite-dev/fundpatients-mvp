@@ -25,9 +25,11 @@ export function SiteHeader() {
     () => typeof window !== "undefined" && window.matchMedia("(min-width: 768px)").matches
   );
   const [scrolledPastHero, setScrolledPastHero] = useState(() => {
-    if (typeof window === "undefined") return true;
+    if (typeof window === "undefined") return false;
     const heroEl = document.getElementById("hero-card");
-    return !heroEl || heroEl.getBoundingClientRect().bottom <= 0;
+    // Default false (header hidden) if hero isn't in DOM yet — effect checks after mount
+    if (!heroEl) return false;
+    return heroEl.getBoundingClientRect().bottom <= 0;
   });
 
   useEffect(() => {
@@ -40,15 +42,16 @@ export function SiteHeader() {
   useEffect(() => {
     if (!isHome) return;
 
-    const heroEl = document.getElementById("hero-card");
-    if (!heroEl) return;
-
-    function handleScroll() {
-      setScrolledPastHero(heroEl!.getBoundingClientRect().bottom <= 0);
+    function check() {
+      const heroEl = document.getElementById("hero-card");
+      if (heroEl) setScrolledPastHero(heroEl.getBoundingClientRect().bottom <= 0);
     }
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    // Sync immediately after mount in case lazy init ran before hero was in DOM
+    check();
+
+    window.addEventListener("scroll", check, { passive: true });
+    return () => window.removeEventListener("scroll", check);
   }, [isHome]);
 
   // On the homepage's desktop layout, the real header stays tucked away
@@ -73,11 +76,25 @@ export function SiteHeader() {
           </Link>
 
           <nav className="hidden items-center gap-6 text-base text-brand-forest md:flex">
-            {navLinks.map((link) => (
-              <Link key={link.href} href={link.href} className="hover:text-brand-deep-green">
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = pathname.startsWith(link.href);
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`relative transition ${
+                    isActive
+                      ? "font-semibold text-brand-deep-green"
+                      : "hover:text-brand-deep-green"
+                  }`}
+                >
+                  {link.label}
+                  {isActive && (
+                    <span className="absolute -bottom-1 left-0 right-0 h-0.5 rounded-full bg-brand-deep-green" />
+                  )}
+                </Link>
+              );
+            })}
           </nav>
         </div>
 
@@ -115,16 +132,23 @@ export function SiteHeader() {
 
       {open && (
         <div className="flex flex-col gap-1 border-t border-border px-6 py-4 md:hidden">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              onClick={() => setOpen(false)}
-              className="rounded-lg px-3 py-2 text-sm text-brand-forest hover:bg-brand-soft-sage"
-            >
-              {link.label}
-            </Link>
-          ))}
+          {navLinks.map((link) => {
+            const isActive = pathname.startsWith(link.href);
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setOpen(false)}
+                className={`rounded-lg px-3 py-2 text-sm transition ${
+                  isActive
+                    ? "bg-brand-soft-sage font-medium text-brand-deep-green"
+                    : "text-brand-forest hover:bg-brand-soft-sage"
+                }`}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
           <div className="mt-2 flex flex-col gap-2 border-t border-border pt-4">
             <Link
               href="/request-help"
