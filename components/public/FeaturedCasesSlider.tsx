@@ -45,9 +45,11 @@ export function FeaturedCasesSlider({ cases }: { cases: CaseSummary[] }) {
                 <Flame className="h-3 w-3 fill-brand-mint" />
                 Almost funded
               </span>
-              <h2 className="mt-4 line-clamp-2 font-display text-3xl font-semibold leading-snug text-white lg:text-4xl">
-                {c.title}
-              </h2>
+              <Link href={`/stories/${c.id}`}>
+                <h2 className="mt-4 line-clamp-2 font-display text-3xl font-semibold leading-snug text-white transition hover:text-brand-mint lg:text-4xl">
+                  {c.title}
+                </h2>
+              </Link>
               {c.location && (
                 <p className="mt-2 flex items-center gap-1 text-xs text-white/40">
                   <MapPin className="h-3 w-3" />
@@ -114,19 +116,19 @@ export function FeaturedCasesSlider({ cases }: { cases: CaseSummary[] }) {
           </div>
 
           {/* Image */}
-          <div className="relative hidden overflow-hidden lg:block">
+          <Link href={`/stories/${c.id}`} className="relative hidden overflow-hidden lg:block">
             {c.cover_image_url ? (
               <Image
                 src={c.cover_image_url}
                 alt={c.title}
                 fill
-                className="object-cover"
+                className="object-cover transition duration-500 hover:scale-105"
               />
             ) : (
               <CasePlaceholder seed={c.id} />
             )}
             <div className="absolute inset-0 bg-gradient-to-r from-brand-forest via-brand-forest/30 to-transparent" />
-          </div>
+          </Link>
         </motion.div>
       </AnimatePresence>
     </div>
