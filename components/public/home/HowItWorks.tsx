@@ -24,7 +24,7 @@ const steps = [
 
 export function HowItWorks() {
   return (
-    <section className="relative overflow-hidden bg-brand-forest px-6 py-28">
+    <section className="relative mx-[12px] mb-6 overflow-hidden rounded-3xl bg-brand-forest px-6 py-28 sm:mx-[20px]">
       {/* Subtle radial glow */}
       <div
         aria-hidden
@@ -44,10 +44,12 @@ export function HowItWorks() {
           </p>
         </div>
 
-        <div className="mt-16 grid gap-6 sm:grid-cols-3">
+        <div className="relative mt-16 grid gap-6 sm:grid-cols-3">
+          {/* Horizontal rule cutting through the midpoint of every card */}
+          <div aria-hidden className="pointer-events-none absolute inset-x-0 top-[148px] hidden h-px bg-white/8 sm:block" />
           {steps.map((s, i) => (
             <Reveal key={s.title} delay={i * 0.12}>
-              <div className="relative flex flex-col rounded-2xl border border-white/8 bg-white/5 p-8 backdrop-blur-sm">
+              <div className="group relative flex min-h-[300px] flex-col justify-between rounded-2xl border border-white/8 bg-white/5 p-8 backdrop-blur-sm transition-all duration-300 hover:-translate-y-2 hover:border-white/20 hover:bg-white/8 hover:shadow-[0_24px_60px_-12px_rgba(134,239,172,0.18)]">
                 {/* Large step number watermark */}
                 <span className="absolute top-5 right-6 font-display text-6xl font-bold leading-none text-white/5 select-none">
                   {s.number}
@@ -57,13 +59,15 @@ export function HowItWorks() {
                   <s.icon className="h-6 w-6 text-brand-mint" strokeWidth={1.5} />
                 </div>
 
-                <p className="mt-6 text-[10px] font-semibold tracking-widest text-brand-mint/70 uppercase">
-                  Step {i + 1}
-                </p>
-                <h3 className="mt-1 font-display text-lg font-semibold text-white">
-                  {s.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-white/50">{s.body}</p>
+                <div>
+                  <p className="text-[10px] font-semibold tracking-widest text-brand-mint/70 uppercase">
+                    Step {i + 1}
+                  </p>
+                  <h3 className="mt-1 font-display text-lg font-semibold text-white">
+                    {s.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-white/50">{s.body}</p>
+                </div>
               </div>
             </Reveal>
           ))}
