@@ -45,7 +45,7 @@ export function FeaturedCasesSlider({ cases }: { cases: CaseSummary[] }) {
                 <Flame className="h-3 w-3 fill-brand-mint" />
                 Almost funded
               </span>
-              <h2 className="mt-4 line-clamp-2 font-display text-2xl font-semibold leading-snug text-white lg:text-3xl">
+              <h2 className="mt-4 line-clamp-2 font-display text-3xl font-semibold leading-snug text-white lg:text-4xl">
                 {c.title}
               </h2>
               {c.location && (

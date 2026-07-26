@@ -36,7 +36,7 @@ export function CaseCard({
 
   return (
     <div
-      className={`group flex flex-col overflow-hidden rounded-2xl border border-border bg-background shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg ${className ?? ""}`}
+      className={`group flex flex-col overflow-hidden rounded-2xl border border-black/5 bg-background shadow-none transition hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] ${className ?? ""}`}
     >
       <Link href={`/stories/${c.id}`} className="relative block aspect-[4/3] overflow-hidden rounded-2xl border-8 border-white">
         {c.cover_image_url ? (
