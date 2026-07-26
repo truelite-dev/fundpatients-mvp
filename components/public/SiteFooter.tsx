@@ -1,8 +1,7 @@
 import Link from "next/link";
+import { Stethoscope } from "lucide-react";
 import { Reveal } from "@/components/motion/Reveal";
 
-// lucide-react dropped brand/social glyphs, so these are small inline marks —
-// no extra icon-pack dependency for three footer links.
 function FacebookIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
@@ -62,53 +61,97 @@ const socialLinks = [
 
 export function SiteFooter() {
   return (
-    <footer className="mt-auto border-t border-border bg-brand-soft-sage/40 px-6 py-14 text-sm text-brand-muted-sage">
-      <Reveal className="mx-auto grid max-w-6xl gap-10 sm:grid-cols-2 lg:grid-cols-4">
-        {columns.map((col) => (
-          <div key={col.title}>
-            <h3 className="mb-3 text-sm font-medium text-brand-forest">{col.title}</h3>
-            <ul className="space-y-2">
-              {col.links.map((link) => (
-                <li key={link.href}>
-                  <Link href={link.href} className="hover:text-brand-deep-green">
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+    <footer className="relative mx-[12px] mb-4 overflow-hidden rounded-3xl bg-brand-forest text-base text-white/60 sm:mx-[20px]">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute bottom-0 left-1/2 h-48 w-2/3 -translate-x-1/2 rounded-full bg-brand-mint/10 blur-3xl"
+      />
+      {/* Footer head — partner CTA */}
+      <Reveal>
+        <div className="mx-auto w-full max-w-[1250px] px-8 py-12 sm:px-14">
+          <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex items-center gap-5">
+              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-white/10">
+                <Stethoscope className="h-6 w-6 text-brand-mint" strokeWidth={1.25} />
+              </div>
+              <div>
+                <h3 className="font-display text-xl font-semibold text-white">
+                  Become a FundPatients partner
+                </h3>
+                <p className="mt-0.5 text-sm text-white/50">
+                  Join our network of verified medical institutions supporting patients in need.
+                </p>
+              </div>
+            </div>
+            <Link
+              href="/partners/become"
+              className="w-fit shrink-0 rounded-full bg-brand-mint px-6 py-3 text-sm font-medium text-brand-forest transition hover:bg-white"
+            >
+              Learn more
+            </Link>
           </div>
-        ))}
-
-        <div className="rounded-2xl border border-border bg-background p-6">
-          <h3 className="font-display text-base font-semibold text-brand-forest">
-            Become a FundPatients partner
-          </h3>
-          <p className="mt-2 text-sm text-brand-muted-sage">
-            Join our network of verified medical institutions supporting patients in need.
-          </p>
-          <Link
-            href="/partners/become"
-            className="mt-4 inline-block rounded-full bg-brand-deep-green px-4 py-2 text-sm font-medium text-white hover:bg-brand-forest"
-          >
-            Learn more
-          </Link>
         </div>
       </Reveal>
 
-      <div className="mx-auto mt-10 flex max-w-6xl flex-col items-center justify-between gap-4 border-t border-border pt-6 sm:flex-row">
-        <p>© {new Date().getFullYear()} FundPatients. All Rights Reserved.</p>
-        <div className="flex items-center gap-3">
-          <span className="text-xs">Follow us</span>
-          {socialLinks.map(({ icon: Icon, label }) => (
-            <a
-              key={label}
-              href="#"
-              aria-label={label}
-              className="rounded-full border border-border p-2 transition hover:border-brand-deep-green hover:text-brand-deep-green"
-            >
-              <Icon className="h-4 w-4" />
-            </a>
-          ))}
+      {/* Divider */}
+      <div className="border-t border-white/10" />
+
+      {/* Nav grid */}
+      <Reveal>
+        <div className="mx-auto w-full max-w-[1250px] px-8 py-12 sm:px-14">
+          <div className="grid gap-10 sm:grid-cols-3 lg:grid-cols-5">
+            {columns.map((col) => (
+              <div key={col.title}>
+                <h3 className="mb-4 text-base font-semibold text-white">{col.title}</h3>
+                <ul className="space-y-3">
+                  {col.links.map((link) => (
+                    <li key={link.href}>
+                      <Link href={link.href} className="hover:text-white">
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+
+            {/* Ad card — spans 2 of the 5 columns */}
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-6 lg:col-span-2">
+              <h3 className="font-display text-base font-semibold text-white">
+                Fund a patient today
+              </h3>
+              <p className="mt-2 text-sm text-white/50">
+                Browse real cases and make a direct impact on someone&apos;s recovery.
+              </p>
+              <Link
+                href="/stories"
+                className="mt-4 inline-block rounded-full bg-brand-mint px-4 py-2 text-sm font-medium text-brand-forest hover:bg-white"
+              >
+                View cases
+              </Link>
+            </div>
+          </div>
+        </div>
+      </Reveal>
+
+      {/* Bottom bar */}
+      <div className="border-t border-white/10" />
+      <div className="mx-auto w-full max-w-[1250px] px-8 py-6 sm:px-14">
+        <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
+          <p className="text-sm">© {new Date().getFullYear()} FundPatients. All Rights Reserved.</p>
+          <div className="flex items-center gap-3">
+            <span className="text-xs">Follow us</span>
+            {socialLinks.map(({ icon: Icon, label }) => (
+              <a
+                key={label}
+                href="#"
+                aria-label={label}
+                className="rounded-full border border-white/20 p-2 transition hover:border-white hover:text-white"
+              >
+                <Icon className="h-4 w-4" />
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </footer>
