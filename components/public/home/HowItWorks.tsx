@@ -47,7 +47,7 @@ export function HowItWorks() {
         <div className="mt-16 grid gap-6 sm:grid-cols-3">
           {steps.map((s, i) => (
             <Reveal key={s.title} delay={i * 0.12}>
-              <div className="relative flex flex-col rounded-2xl border border-white/8 bg-white/5 p-8 backdrop-blur-sm">
+              <div className="relative flex flex-col rounded-2xl border border-white/8 bg-white/5 p-8 pb-12 backdrop-blur-sm">
                 {/* Large step number watermark */}
                 <span className="absolute top-5 right-6 font-display text-6xl font-bold leading-none text-white/5 select-none">
                   {s.number}
