@@ -1,6 +1,15 @@
 import Link from "next/link";
-import { HeartHandshake, Wallet } from "lucide-react";
 import { Reveal } from "@/components/motion/Reveal";
+import { AvatarStack } from "@/components/public/home/AvatarStack";
+
+const allAvatars = [
+  "/images/avatars/avatar-3.jpg",
+  "/images/avatars/avatar-1.jpg",
+  "/images/avatars/avatar-4.jpg",
+  "/images/avatars/avatar-2.jpg",
+  "/images/avatars/avatar-8.jpg",
+  "/images/avatars/avatar-9.jpg",
+];
 
 const options = [
   {
@@ -9,7 +18,6 @@ const options = [
     body: "Choose a story that speaks to you and support that person's care directly.",
     href: "/stories",
     cta: "View cases",
-    icon: HeartHandshake,
   },
   {
     eyebrow: "Recurring",
@@ -17,7 +25,6 @@ const options = [
     body: "Set up a recurring gift to a case and help carry their treatment to the finish line.",
     href: "/stories?recurring=true",
     cta: "Learn more",
-    icon: Wallet,
   },
 ];
 
@@ -47,28 +54,26 @@ export function WaysToDonate() {
             Support individuals facing urgent medical expenses and help them access vital care.
           </p>
         </div>
-        <div className="mt-10 grid gap-6 sm:grid-cols-2">
+
+        <AvatarStack avatars={allAvatars} />
+
+        <div className="mt-6 grid gap-6 sm:grid-cols-2">
           {options.map((o, i) => (
             <Reveal key={o.title} delay={i * 0.1} className="h-full">
-              <div className="flex h-full min-h-[420px] flex-col rounded-2xl bg-background/70 p-12 shadow-[0_40px_80px_-30px_rgba(11,31,14,0.15)] backdrop-blur-sm transition hover:shadow-[0_50px_100px_-30px_rgba(11,31,14,0.22)]">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand-soft-sage">
-                  <o.icon className="h-6 w-6 text-brand-deep-green" strokeWidth={1.5} />
-                </div>
-                <div className="mt-auto">
-                  <p className="text-xs font-semibold tracking-wide text-brand-muted-sage uppercase">
-                    {o.eyebrow}
-                  </p>
-                  <h3 className="mt-1 font-display text-2xl font-semibold text-brand-forest">
-                    {o.title}
-                  </h3>
-                  <p className="mt-2 text-base text-brand-muted-sage">{o.body}</p>
-                  <Link
-                    href={o.href}
-                    className="mt-6 inline-block w-fit rounded-full bg-brand-deep-green px-5 py-2 text-sm font-medium text-white transition hover:bg-brand-forest"
-                  >
-                    {o.cta}
-                  </Link>
-                </div>
+              <div className="flex h-full flex-col rounded-2xl bg-background/70 p-8 shadow-[0_40px_80px_-30px_rgba(11,31,14,0.15)] backdrop-blur-sm transition hover:shadow-[0_50px_100px_-30px_rgba(11,31,14,0.22)]">
+                <p className="text-xs font-semibold tracking-wide text-brand-muted-sage uppercase">
+                  {o.eyebrow}
+                </p>
+                <h3 className="mt-1 font-display text-2xl font-semibold text-brand-forest">
+                  {o.title}
+                </h3>
+                <p className="mt-2 text-base text-brand-muted-sage">{o.body}</p>
+                <Link
+                  href={o.href}
+                  className="mt-6 inline-block w-fit rounded-full bg-brand-deep-green px-5 py-2 text-sm font-medium text-white transition hover:bg-brand-forest"
+                >
+                  {o.cta}
+                </Link>
               </div>
             </Reveal>
           ))}
