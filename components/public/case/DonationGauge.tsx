@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 import { motion } from "motion/react";
+import { Heart } from "lucide-react";
 import { formatCurrency } from "@/lib/formatCurrency";
 
 const R = 80;
 const CX = 110;
-const CY = 118;
+const CY = 100;
 const START_ANGLE = 135; // degrees in SVG coord space (CW from positive-x axis)
 const TOTAL_SWEEP = 270;
 
@@ -47,7 +48,8 @@ export function DonationGauge({ id, goal_amount, currency, amount_raised, suppor
   const dot = polar(START_ANGLE + (percent / 100) * TOTAL_SWEEP);
 
   return (
-    <div className="rounded-2xl border border-border bg-background p-5">
+    <div className="overflow-hidden rounded-2xl border border-border bg-background">
+      <div className="p-5">
       {/* Donor pill */}
       <div className="flex justify-center">
         <span className="rounded-full bg-brand-soft-sage px-4 py-1 text-xs font-semibold text-brand-forest">
@@ -58,7 +60,7 @@ export function DonationGauge({ id, goal_amount, currency, amount_raised, suppor
       {/* SVG gauge */}
       <svg viewBox="0 0 220 183" className="mt-1 w-full" aria-hidden>
         {/* Background arc */}
-        <path d={BG_PATH} fill="none" stroke="#e4f7e6" strokeWidth={14} strokeLinecap="round" />
+        <path d={BG_PATH} fill="none" stroke="#e4f7e6" strokeWidth={7} strokeLinecap="round" />
 
         {/* Progress arc */}
         {percent > 0 && (
@@ -66,7 +68,7 @@ export function DonationGauge({ id, goal_amount, currency, amount_raised, suppor
             d={progressPath(percent)}
             fill="none"
             stroke="#1a6b2a"
-            strokeWidth={14}
+            strokeWidth={7}
             strokeLinecap="round"
             initial={{ pathLength: 0 }}
             animate={{ pathLength: 1 }}
@@ -90,26 +92,26 @@ export function DonationGauge({ id, goal_amount, currency, amount_raised, suppor
         )}
 
         {/* Center labels */}
-        <text x={CX} y={CY - 26} textAnchor="middle" fill="#6b7c6e" fontSize={11} fontFamily="inherit">
-          Amount raised
-        </text>
-        <text x={CX} y={CY + 4} textAnchor="middle" fill="#0b1f0e" fontSize={19} fontWeight="700" fontFamily="inherit">
+<text x={CX} y={CY - 8} textAnchor="middle" fill="#0b1f0e" fontSize={15} fontWeight="700" fontFamily="inherit">
           {formatCurrency(amount_raised, currency)}
         </text>
-        <text x={CX} y={CY + 22} textAnchor="middle" fill="#6b7c6e" fontSize={11} fontFamily="inherit">
+        <text x={CX} y={CY + 8} textAnchor="middle" fill="#6b7c6e" fontSize={9} fontFamily="inherit">
           {formatCurrency(amountLeft, currency)} left
         </text>
 
         {/* 0% / 100% end labels */}
-        <text x={ARC_START.x} y={ARC_START.y + 18} textAnchor="middle" fill="#6b7c6e" fontSize={10} fontFamily="inherit">0%</text>
-        <text x={ARC_END.x} y={ARC_END.y + 18} textAnchor="middle" fill="#6b7c6e" fontSize={10} fontFamily="inherit">100%</text>
+        <text x={ARC_START.x} y={ARC_START.y + 18} textAnchor="middle" fill="#6b7c6e" fontSize={8} fontFamily="inherit">0%</text>
+        <text x={ARC_END.x} y={ARC_END.y + 18} textAnchor="middle" fill="#6b7c6e" fontSize={8} fontFamily="inherit">100%</text>
       </svg>
 
-      {/* Donate CTA */}
+      </div>
+
+      {/* Donate CTA — card footer */}
       <Link
         href={`/donate?case=${id}`}
-        className="mt-1 flex w-full items-center justify-center rounded-full bg-brand-deep-green py-3 text-sm font-semibold text-white transition hover:bg-brand-forest"
+        className="flex w-full items-center justify-center gap-2 border-t border-border bg-brand-deep-green py-4 text-base font-semibold text-white transition hover:bg-brand-forest"
       >
+        <Heart className="h-4 w-4" />
         Donate now
       </Link>
     </div>

@@ -4,11 +4,12 @@ import { notFound } from "next/navigation";
 import { MapPin, Calendar } from "lucide-react";
 import { getCaseById, listPublishedCases } from "@/lib/cases";
 import { listCaseUpdates, listCasePublicDonations } from "@/lib/caseActivity";
+import { listCaseComments } from "@/lib/caseComments";
 import { CasePlaceholder } from "@/components/public/CasePlaceholder";
 import { DonationGauge } from "@/components/public/case/DonationGauge";
 import { CaseTabs } from "@/components/public/case/CaseTabs";
 import { ShareButton } from "@/components/public/case/ShareButton";
-import { UpdatesFeed } from "@/components/public/case/UpdatesFeed";
+import { DonorsFeed } from "@/components/public/case/DonorsFeed";
 import { CaseCard } from "@/components/public/CaseCard";
 import { Reveal } from "@/components/motion/Reveal";
 import { formatRelativeTime } from "@/lib/formatRelativeTime";
@@ -26,11 +27,12 @@ export default async function CaseDetailPage({
 }) {
   const { caseId } = await params;
 
-  const [activeCase, allCases, updates, donations] = await Promise.all([
+  const [activeCase, allCases, updates, donations, comments] = await Promise.all([
     getCaseById(caseId),
     listPublishedCases(),
     listCaseUpdates(caseId),
     listCasePublicDonations(caseId),
+    listCaseComments(caseId),
   ]);
 
   if (!activeCase) notFound();
@@ -38,14 +40,15 @@ export default async function CaseDetailPage({
   const related = allCases.filter((c) => c.id !== caseId).slice(0, 3);
 
   return (
-    <main className="mx-auto w-full max-w-5xl flex-1 px-6 py-10">
+    <div className="flex flex-1 flex-col">
+    <main className="mx-auto w-full max-w-[1250px] flex-1 px-6 py-10 lg:pb-20">
       {/* Two-column hero */}
-      <div className="lg:grid lg:grid-cols-[1fr_340px] lg:gap-10">
+      <div className="lg:grid lg:grid-cols-[1fr_420px] lg:gap-16">
 
         {/* ── LEFT ── */}
         <div>
           {/* Hero image */}
-          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-brand-soft-sage">
+          <div className="relative h-[432px] overflow-hidden rounded-2xl bg-brand-soft-sage">
             {activeCase.cover_image_url ? (
               <Image
                 src={activeCase.cover_image_url}
@@ -87,9 +90,12 @@ export default async function CaseDetailPage({
           {/* Tabs: Story / Comments / Medical partner */}
           <CaseTabs
             caseId={activeCase.id}
+            title={activeCase.title ?? ""}
             description={activeCase.description}
             publishedAt={activeCase.published_at}
             organization={activeCase.organizations ?? null}
+            comments={comments}
+            updates={updates}
           />
         </div>
 
@@ -106,7 +112,7 @@ export default async function CaseDetailPage({
             />
 
             {/* Share bar */}
-            <div className="flex items-center gap-3 border-t border-border pt-4">
+            <div className="flex items-center gap-3 [&>*]:flex-1 [&>*]:justify-center">
               <ShareButton caseId={activeCase.id} title={activeCase.title ?? ""} />
               <Link
                 href="/login"
@@ -116,40 +122,44 @@ export default async function CaseDetailPage({
               </Link>
             </div>
 
-            {/* Updates feed */}
-            <UpdatesFeed updates={updates} donations={donations} />
+            {/* Donors feed */}
+            <DonorsFeed donations={donations} />
           </div>
         </div>
       </div>
 
-      {/* Related stories */}
+    </main>
+
+      {/* Related stories — full width, outside the constrained main */}
       {related.length > 0 && (
-        <div className="mt-20">
-          <div className="text-center">
-            <h2 className="font-display text-xl font-semibold text-brand-forest sm:text-2xl">
-              More stories you might be interested in
-            </h2>
-            <p className="mt-2 text-sm text-brand-muted-sage">
-              Directly support individuals facing urgent medical expenses and help them access vital care.
-            </p>
-          </div>
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {related.map((c, i) => (
-              <Reveal key={c.id} delay={i * 0.08}>
-                <CaseCard case={c} className="h-full" />
-              </Reveal>
-            ))}
-          </div>
-          <div className="mt-8 flex justify-center">
-            <Link
-              href="/stories"
-              className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-medium text-brand-forest transition hover:border-brand-deep-green hover:text-brand-deep-green"
-            >
-              View more
-            </Link>
+        <div className="mx-[12px] mb-6 overflow-hidden rounded-3xl bg-brand-soft-sage/40 px-6 py-16 sm:mx-[20px] sm:px-10 sm:py-20">
+          <div className="mx-auto max-w-5xl">
+            <div className="text-center">
+              <h2 className="font-display text-xl font-semibold text-brand-forest sm:text-2xl">
+                More stories you might be interested in
+              </h2>
+              <p className="mt-2 text-sm text-brand-muted-sage">
+                Directly support individuals facing urgent medical expenses and help them access vital care.
+              </p>
+            </div>
+            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {related.map((c, i) => (
+                <Reveal key={c.id} delay={i * 0.08}>
+                  <CaseCard case={c} className="h-full" />
+                </Reveal>
+              ))}
+            </div>
+            <div className="mt-8 flex justify-center">
+              <Link
+                href="/stories"
+                className="inline-flex items-center gap-2 rounded-full border border-brand-forest/20 bg-white px-6 py-3 text-sm font-medium text-brand-forest transition hover:border-brand-deep-green hover:text-brand-deep-green"
+              >
+                View more
+              </Link>
+            </div>
           </div>
         </div>
       )}
-    </main>
+    </div>
   );
 }
