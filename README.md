@@ -9,7 +9,7 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Open [http://localhost:3010](http://localhost:3010).
 
 You'll need a `.env.local` with the Supabase and payment provider keys listed in `CLAUDE.md`.
 
