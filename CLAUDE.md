@@ -20,9 +20,15 @@ Next.js 16 App Router app for FundPatients, a medical-crowdfunding platform conn
 Sourced from `docs/Fund_Patients_Cheatsheet.pdf` (brand cheatsheet). Defined in `app/globals.css`:
 
 - Fonts: `Bricolage Grotesque` (`--font-display`, headings) / `DM Sans` (`--font-sans`, body & UI)
-- Colors: `--brand-forest` `#0B1F0E` (dark bg / primary text), `--brand-deep-green` `#1A6B2A` (primary/CTAs/links), `--brand-mint` `#6EE07A` (hover), `--brand-muted-sage` `#6B7C6E` (secondary text), `--brand-soft-sage` `#E4F7E6` (tinted backgrounds/pills)
+- Colors: `--brand-forest` `#0B1F0E` (dark bg / primary text), `--brand-deep-green` `#1A6B2A` (primary/CTAs/links), `--brand-mint` `#6EE07A` (accent/CTAs on dark), `--brand-muted-sage` `#6B7C6E` (secondary text), `--brand-soft-sage` `#E4F7E6` (tinted backgrounds/pills)
 
-Final page-level visual design is pending a Figma UI file — until it lands, pages should stay functionally correct with minimal/placeholder styling rather than being polished against guesswork.
+## Visual design patterns
+
+- **Detached sections**: key sections (hero, HowItWorks, footer) float as standalone rounded cards — `mx-[12px] sm:mx-[20px] rounded-3xl` with `mb-4`/`mb-6` gap between them. Match this style for any new full-width dark section.
+- **Footer**: dark (`bg-brand-forest`), absorbed `PartnerCTA` as a footer head (separated by a full-width `border-white/10` divider), 5-col nav grid with an ad card spanning `lg:col-span-2`, soft mint glow at the base. `SiteFooter` is self-contained — do not render a standalone `PartnerCTA` on any page.
+- **HowItWorks cards**: `min-h-[300px]` + `justify-between` (icon pinned top, text block anchored bottom), horizontal rule at midpoint, hover lift + mint glow (`hover:-translate-y-2 hover:shadow-[0_24px_60px_-12px_rgba(134,239,172,0.18)]`).
+- **WaysToDonate**: avatar stack (`AvatarStack.tsx`) sits between subtitle and card grid at 85% width; cards hug content (no fixed height).
+- **Animations**: always use `Reveal` wrapper for sections. Import from `motion/react` (not `framer-motion`).
 
 ## Planning docs
 
@@ -76,7 +82,23 @@ Located in `supabase/migrations/`. See migration file headers for details on eac
 ## GitHub
 
 - Repo: https://github.com/truelite-dev/fundpatients-mvp
-- Org: `truelite-dev`
+- Org: `truelite-dev` (credentials: `truelite.dev@gmail.com`)
+
+**Before every commit**, verify the local git identity:
+```
+git config --local user.name   # must be: truelite-dev
+git config --local user.email  # must be: truelite.dev@gmail.com
+```
+If not set: `git config user.name "truelite-dev" && git config user.email "truelite.dev@gmail.com"`
+
+## CI
+
+GitHub Actions workflow at `.github/workflows/ci.yml` — runs on every push/PR to `main`:
+1. `npx tsc --noEmit` — type check
+2. `npm run lint` — ESLint
+3. `npm run build` — Next.js build (uses `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY` from GitHub Secrets)
+
+After every push, check CI with: `gh run list --limit 1 --repo truelite-dev/fundpatients-mvp`
 
 ## Branching strategy
 
