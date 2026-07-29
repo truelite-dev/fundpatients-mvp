@@ -85,7 +85,7 @@ export function SiteFooter() {
             </div>
             <Link
               href="/partners/become"
-              className="w-fit shrink-0 rounded-full bg-brand-mint px-6 py-3 text-sm font-medium text-brand-forest transition hover:bg-white"
+              className="w-full shrink-0 rounded-full bg-brand-mint px-6 py-3 text-center text-sm font-medium text-brand-forest transition hover:bg-white sm:w-fit"
             >
               Learn more
             </Link>
@@ -116,7 +116,7 @@ export function SiteFooter() {
             ))}
 
             {/* Ad card — spans 2 of the 5 columns */}
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-6 lg:col-span-2">
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-6 sm:col-span-3 lg:col-span-2">
               <h3 className="font-display text-base font-semibold text-white">
                 Fund a patient today
               </h3>

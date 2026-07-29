@@ -14,7 +14,7 @@ export async function StoriesPreview() {
   const cases = allCases.filter((c) => !featuredIds.has(c.id)).slice(0, 6);
 
   return (
-    <section className="w-full bg-gradient-to-b from-white to-[var(--page-background)] py-28">
+    <section className="w-full bg-gradient-to-b from-white to-[var(--page-background)] pt-14 pb-28 sm:py-28">
       <div className="mx-auto w-full max-w-6xl px-6">
         <div className="text-center">
           <p className="text-xs font-semibold tracking-widest text-brand-deep-green uppercase">

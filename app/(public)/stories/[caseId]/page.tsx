@@ -13,6 +13,7 @@ import { DonorsFeed } from "@/components/public/case/DonorsFeed";
 import { CaseCard } from "@/components/public/CaseCard";
 import { Reveal } from "@/components/motion/Reveal";
 import { formatRelativeTime } from "@/lib/formatRelativeTime";
+import { formatCurrency } from "@/lib/formatCurrency";
 
 export async function generateMetadata({ params }: { params: Promise<{ caseId: string }> }) {
   const { caseId } = await params;
@@ -41,14 +42,14 @@ export default async function CaseDetailPage({
 
   return (
     <div className="flex flex-1 flex-col">
-    <main className="mx-auto w-full max-w-[1250px] flex-1 px-6 py-10 lg:pb-20">
+    <main className="mx-auto w-full max-w-[1250px] flex-1 px-4 pt-4 pb-10 sm:px-6 sm:py-10 lg:pb-20">
       {/* Two-column hero */}
-      <div className="lg:grid lg:grid-cols-[1fr_420px] lg:gap-16">
+      <div className="lg:grid lg:grid-cols-[1fr_420px] lg:gap-10">
 
         {/* ── LEFT ── */}
         <div>
           {/* Hero image */}
-          <div className="relative h-[432px] overflow-hidden rounded-2xl bg-brand-soft-sage">
+          <div className="relative h-[220px] overflow-hidden rounded-2xl bg-brand-soft-sage sm:h-[442px]">
             {activeCase.cover_image_url ? (
               <Image
                 src={activeCase.cover_image_url}
@@ -86,6 +87,50 @@ export default async function CaseDetailPage({
           <h1 className="mt-5 font-display text-2xl font-semibold leading-snug text-brand-forest sm:text-3xl">
             {activeCase.title}
           </h1>
+
+          {/* Mobile-only donation stats */}
+          {(() => {
+            const goal = activeCase.goal_amount ?? 0;
+            const raised = activeCase.amount_raised ?? 0;
+            const left = Math.max(0, goal - raised);
+            const pct = goal > 0 ? Math.min(100, Math.round((raised / goal) * 100)) : 0;
+            return (
+              <div className="mt-4 lg:hidden">
+                <div className="flex items-end justify-between text-sm">
+                  <div>
+                    <p className="text-xs text-brand-muted-sage">Raised</p>
+                    <p className="font-display text-lg font-semibold text-brand-forest">
+                      {formatCurrency(raised, activeCase.currency)}
+                    </p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-xs text-brand-muted-sage">Left</p>
+                    <p className="font-display text-lg font-semibold text-brand-forest">
+                      {formatCurrency(left, activeCase.currency)}
+                    </p>
+                  </div>
+                </div>
+                <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-border">
+                  <div
+                    className="h-full rounded-full bg-brand-deep-green"
+                    style={{ width: `${pct}%` }}
+                  />
+                </div>
+                <p className="mt-1 text-xs font-medium text-brand-deep-green">{pct}% funded</p>
+              </div>
+            );
+          })()}
+
+          {/* Mobile-only CTA row */}
+          <div className="mt-4 flex items-center gap-3 lg:hidden [&>*]:flex-1 [&>*]:justify-center">
+            <Link
+              href={`/donate?caseId=${activeCase.id}`}
+              className="inline-flex items-center gap-2 rounded-full bg-brand-deep-green px-4 py-2 text-sm font-medium text-white transition hover:bg-brand-forest"
+            >
+              Donate
+            </Link>
+            <ShareButton caseId={activeCase.id} title={activeCase.title ?? ""} />
+          </div>
 
           {/* Tabs: Story / Comments / Medical partner */}
           <CaseTabs

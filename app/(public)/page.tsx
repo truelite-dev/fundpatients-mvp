@@ -11,7 +11,7 @@ export default async function Home() {
 
   return (
     <main className="flex flex-1 flex-col">
-      <div className="pt-5">
+      <div className="pt-4 md:pt-5">
         <HeroCarousel cases={topCases} />
       </div>
       <Reveal>

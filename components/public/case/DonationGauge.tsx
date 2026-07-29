@@ -60,7 +60,7 @@ export function DonationGauge({ id, goal_amount, currency, amount_raised, suppor
       {/* SVG gauge */}
       <svg viewBox="0 0 220 183" className="mt-1 w-full" aria-hidden>
         {/* Background arc */}
-        <path d={BG_PATH} fill="none" stroke="#e4f7e6" strokeWidth={7} strokeLinecap="round" />
+        <path d={BG_PATH} fill="none" stroke="#e2e8e3" strokeWidth={7} strokeLinecap="round" />
 
         {/* Progress arc */}
         {percent > 0 && (

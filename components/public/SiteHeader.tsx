@@ -22,7 +22,7 @@ export function SiteHeader() {
   const isHome = pathname === "/";
 
   const [isDesktop, setIsDesktop] = useState(
-    () => typeof window !== "undefined" && window.matchMedia("(min-width: 768px)").matches
+    () => typeof window !== "undefined" && window.matchMedia("(min-width: 1024px)").matches
   );
   const [scrolledPastHero, setScrolledPastHero] = useState(() => {
     if (typeof window === "undefined") return false;
@@ -33,7 +33,7 @@ export function SiteHeader() {
   });
 
   useEffect(() => {
-    const mq = window.matchMedia("(min-width: 768px)");
+    const mq = window.matchMedia("(min-width: 1024px)");
     const handleChange = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
     mq.addEventListener("change", handleChange);
     return () => mq.removeEventListener("change", handleChange);
@@ -65,8 +65,8 @@ export function SiteHeader() {
       animate={{ y: hideForHero ? -96 : 0, opacity: hideForHero ? 0 : 1 }}
       transition={{ duration: 0.35, ease: "easeOut" }}
       style={{ pointerEvents: hideForHero ? "none" : "auto" }}
-      className={`top-4 z-50 mx-[12px] rounded-2xl bg-background/70 shadow-[0_8px_24px_-8px_rgba(11,31,14,0.10)] backdrop-blur-lg sm:mx-[20px] ${
-        isHome ? "sticky md:fixed md:inset-x-0" : "sticky"
+      className={`top-3 z-50 mt-3 mx-[12px] rounded-2xl bg-background/70 shadow-[0_8px_24px_-8px_rgba(11,31,14,0.10)] backdrop-blur-lg sm:mx-[20px] md:mt-0 md:top-4 ${
+        isHome ? "sticky lg:fixed lg:inset-x-0" : "sticky"
       }`}
     >
       <div className="flex items-center justify-between gap-4 px-6 py-4">
@@ -75,7 +75,7 @@ export function SiteHeader() {
             <Image src="/logos/logomark-dark.svg" alt="FundPatients" width={140} height={40} priority />
           </Link>
 
-          <nav className="hidden items-center gap-6 text-base text-brand-forest md:flex">
+          <nav className="hidden items-center gap-6 text-base text-brand-forest lg:flex">
             {navLinks.map((link) => {
               const isActive = pathname.startsWith(link.href);
               return (
@@ -98,7 +98,7 @@ export function SiteHeader() {
           </nav>
         </div>
 
-        <div className="hidden items-center gap-3 text-sm md:flex">
+        <div className="hidden items-center gap-3 text-sm lg:flex">
           <Link
             href="/stories"
             aria-label="Search stories"
@@ -124,14 +124,14 @@ export function SiteHeader() {
           type="button"
           aria-label={open ? "Close menu" : "Open menu"}
           onClick={() => setOpen((o) => !o)}
-          className="rounded-full border border-border p-2 text-brand-forest md:hidden"
+          className="rounded-full border border-border p-2 text-brand-forest lg:hidden"
         >
           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </div>
 
       {open && (
-        <div className="flex flex-col gap-1 border-t border-border px-6 py-4 md:hidden">
+        <div className="flex flex-col gap-1 border-t border-border px-6 py-4 lg:hidden">
           {navLinks.map((link) => {
             const isActive = pathname.startsWith(link.href);
             return (

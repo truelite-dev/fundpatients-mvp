@@ -50,7 +50,7 @@ export function HeroCarousel({ cases }: { cases: CaseSummary[] }) {
     >
       {/* Homepage-only experiment: duplicate the site nav as a card-header.
           The real SiteHeader slides in once this hero card scrolls past. */}
-      <div className="relative hidden items-center justify-between gap-4 px-8 py-7 sm:px-14 md:flex">
+      <div className="relative hidden items-center justify-between gap-4 px-8 py-7 sm:px-14 lg:flex">
         <div className="flex items-center gap-10">
           <Image
             src="/logos/logomark-lemon-whtetext.svg"
@@ -108,8 +108,9 @@ export function HeroCarousel({ cases }: { cases: CaseSummary[] }) {
         className="pointer-events-none absolute -bottom-32 left-1/3 h-80 w-80 rounded-full bg-brand-mint/10 blur-3xl"
       />
 
-      <div className="relative mx-auto flex w-full max-w-[1250px] flex-col items-center gap-12 px-8 py-16 sm:px-14 sm:py-20 lg:flex-row lg:justify-between">
+      <div className="relative mx-auto flex w-full max-w-[1250px] flex-col items-center gap-12 px-5 py-10 sm:px-14 sm:py-20 lg:flex-row lg:justify-between">
         <motion.div
+          className="text-center lg:text-left"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
@@ -122,16 +123,16 @@ export function HeroCarousel({ cases }: { cases: CaseSummary[] }) {
           <p className="mt-4 max-w-md text-base leading-relaxed text-brand-soft-sage/90 sm:text-xl">
             Discover a supportive platform for medical fundraising and get the care you deserve.
           </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center lg:items-start lg:justify-start">
             <Link
               href="/stories"
-              className="rounded-full bg-brand-mint px-6 py-3 text-center font-medium text-brand-forest transition hover:bg-white sm:w-auto"
+              className="w-full rounded-full bg-brand-mint px-6 py-3 text-center font-medium text-brand-forest transition hover:bg-white sm:w-auto"
             >
               Donate now
             </Link>
             <Link
               href="/request-help"
-              className="rounded-full border border-white/30 px-6 py-3 text-center font-medium text-white transition hover:bg-white/10 sm:w-auto"
+              className="w-full rounded-full border border-white/30 px-6 py-3 text-center font-medium text-white transition hover:bg-white/10 sm:w-auto"
             >
               Request help
             </Link>

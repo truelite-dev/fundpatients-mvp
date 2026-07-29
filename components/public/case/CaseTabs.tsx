@@ -60,21 +60,23 @@ export function CaseTabs({ caseId, title, description, publishedAt, organization
               })}
             </p>
           )}
-          <div className="mt-6 flex flex-wrap items-center gap-3">
+          <div className="mt-6 hidden flex-wrap items-center gap-3 sm:flex">
             <Link
               href={`/donate?case=${caseId}`}
-              className="inline-flex items-center gap-2 rounded-full bg-brand-deep-green px-6 py-3 text-sm font-semibold text-white transition hover:bg-brand-forest"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand-deep-green px-6 py-3 text-sm font-semibold text-white transition hover:bg-brand-forest sm:w-auto sm:justify-start"
             >
               <Heart className="h-4 w-4" />
               Donate now
             </Link>
-            <ShareButton caseId={caseId} title={title} />
-            <Link
-              href="/login"
-              className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-medium text-brand-muted-sage transition hover:border-brand-deep-green hover:text-brand-deep-green"
-            >
-              Follow
-            </Link>
+            <div className="hidden sm:contents">
+              <ShareButton caseId={caseId} title={title} />
+              <Link
+                href="/login"
+                className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-medium text-brand-muted-sage transition hover:border-brand-deep-green hover:text-brand-deep-green"
+              >
+                Follow
+              </Link>
+            </div>
           </div>
         </div>
       )}

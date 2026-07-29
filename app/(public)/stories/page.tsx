@@ -37,9 +37,9 @@ export default async function StoriesPage({
   }
 
   return (
-    <main className="mx-auto w-full max-w-7xl flex-1 px-6 pb-16 pt-4">
+    <main className="mx-auto w-full max-w-7xl flex-1 px-4 pb-16 pt-4 sm:px-6">
       {featuredCases.length > 0 && (
-        <div className="mt-10">
+        <div className="sm:mt-10">
           <FeaturedCasesSlider cases={featuredCases} />
         </div>
       )}
