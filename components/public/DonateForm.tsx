@@ -68,7 +68,7 @@ export function DonateForm({
   }
 
   return (
-    <form onSubmit={handleSubmit} className="mt-8 flex flex-col gap-6">
+    <form onSubmit={handleSubmit} className="mt-8 flex flex-col gap-6 rounded-2xl border border-border bg-white p-6 shadow-md">
       <label className="flex flex-col gap-1 text-sm">
         Enter amount
         <div className="flex gap-2">
