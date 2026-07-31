@@ -1,14 +1,9 @@
 import Link from "next/link";
-import { ArrowRight, Building2, Phone, Stethoscope, CalendarDays } from "lucide-react";
+import { ArrowRight, Building2, Stethoscope, CalendarDays } from "lucide-react";
 import { listApprovedOrganizations } from "@/lib/organizations";
 import { Reveal } from "@/components/motion/Reveal";
 
 export const metadata = { title: "Partners | FundPatients" };
-
-const specializations = [
-  "Pediatrics", "Oncology", "Nephrology", "Orthopedics", "General surgery",
-  "Cardiology", "Neurology", "Obstetrics", "Ophthalmology", "Dermatology",
-];
 
 const stats = [
   { value: "62+", label: "Verified partners" },
@@ -28,7 +23,7 @@ export default async function PartnersPage() {
         className="mx-[12px] mt-8 mb-6 overflow-hidden rounded-3xl sm:mx-[20px]"
         style={{ background: "linear-gradient(145deg, #1a6b35 0%, #0f3d1d 45%, #071a0d 100%)" }}
       >
-        <div className="mx-auto max-w-[1250px] px-8 py-16 sm:px-14 sm:py-20 lg:grid lg:grid-cols-2 lg:items-center lg:gap-16">
+        <div className="mx-auto max-w-[1250px] px-8 py-10 sm:px-14 sm:py-20 lg:grid lg:grid-cols-2 lg:items-center lg:gap-16">
           <div>
             <span className="inline-block rounded-full bg-brand-mint/15 px-4 py-1.5 text-xs font-semibold tracking-widest text-brand-mint uppercase">
               Medical network

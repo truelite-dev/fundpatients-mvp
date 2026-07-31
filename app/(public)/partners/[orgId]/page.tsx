@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, Building2, Stethoscope, CalendarDays, Phone, Mail, CheckCircle2 } from "lucide-react";
+import { Building2, Stethoscope, CalendarDays, Phone, CheckCircle2 } from "lucide-react";
 import { getOrganizationById, listCasesByOrganization } from "@/lib/organizations";
 import { CaseCard } from "@/components/public/CaseCard";
 import { Reveal } from "@/components/motion/Reveal";

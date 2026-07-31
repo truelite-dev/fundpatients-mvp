@@ -101,7 +101,7 @@ export default function AboutPage() {
             Our mission
           </span>
           <h1 className="mt-6 font-display text-4xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl">
-            No one should lose their life<br className="hidden sm:block" /> because they can't pay for it.
+            No one should lose their life<br className="hidden sm:block" /> because they can&apos;t pay for it.
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-white/70 sm:text-xl">
             FundPatients is a Nigerian medical crowdfunding platform that connects patients facing urgent healthcare costs with a community of donors — transparently, safely, and with dignity.
@@ -147,13 +147,13 @@ export default function AboutPage() {
                 Born from a personal crisis, built for everyone
               </h2>
               <p className="mt-5 leading-relaxed text-brand-muted-sage">
-                In 2021, our co-founder Adaeze watched her cousin's cancer treatment stall for three weeks — not because treatment wasn't available, but because the family couldn't raise the upfront deposit fast enough. The hospital couldn't start. Time was running out. Friends and family tried to help, but coordinating collections over WhatsApp was chaotic.
+                In 2021, our co-founder Adaeze watched her cousin&apos;s cancer treatment stall for three weeks — not because treatment wasn&apos;t available, but because the family couldn&apos;t raise the upfront deposit fast enough. The hospital couldn&apos;t start. Time was running out. Friends and family tried to help, but coordinating collections over WhatsApp was chaotic.
               </p>
               <p className="mt-4 leading-relaxed text-brand-muted-sage">
-                That experience sparked a question: why wasn't there a trusted, structured way to raise medical funds in Nigeria — one where the hospital was involved from day one, where donors could see exactly where their money went, and where the patient didn't have to beg?
+                That experience sparked a question: why wasn&apos;t there a trusted, structured way to raise medical funds in Nigeria — one where the hospital was involved from day one, where donors could see exactly where their money went, and where the patient didn&apos;t have to beg?
               </p>
               <p className="mt-4 leading-relaxed text-brand-muted-sage">
-                FundPatients was the answer. We built it so that the next family wouldn't have to lose three weeks.
+                FundPatients was the answer. We built it so that the next family wouldn&apos;t have to lose three weeks.
               </p>
             </div>
             <div className="mt-10 lg:mt-0">
@@ -161,7 +161,7 @@ export default function AboutPage() {
               <div className="rounded-2xl bg-white p-8 shadow-sm">
                 <Quote className="h-8 w-8 text-brand-mint" />
                 <p className="mt-4 font-display text-xl font-semibold leading-snug text-brand-forest">
-                  "We didn't want to build a charity. We wanted to build infrastructure — the kind that means a family never has to scramble again."
+                  &ldquo;We didn&apos;t want to build a charity. We wanted to build infrastructure — the kind that means a family never has to scramble again.&rdquo;
                 </p>
                 <div className="mt-6 flex items-center gap-3">
                   <div className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-deep-green font-display text-sm font-semibold text-white">AO</div>
@@ -185,7 +185,7 @@ export default function AboutPage() {
               Transparent from day one
             </h2>
             <p className="mx-auto mt-3 max-w-xl text-brand-muted-sage">
-              We designed every step so that donors always know what they're funding and patients always know help is on the way.
+              We designed every step so that donors always know what they&apos;re funding and patients always know help is on the way.
             </p>
           </div>
           <div className="mt-14 grid gap-8 sm:grid-cols-3">
@@ -266,7 +266,7 @@ export default function AboutPage() {
               People who believe healthcare is a right
             </h2>
             <p className="mx-auto mt-3 max-w-xl text-brand-muted-sage">
-              We're a small, passionate team spread across Lagos, Abuja, and Kano — united by one belief: that no one should have to choose between getting better and going broke.
+              We&apos;re a small, passionate team spread across Lagos, Abuja, and Kano — united by one belief: that no one should have to choose between getting better and going broke.
             </p>
           </div>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -291,7 +291,7 @@ export default function AboutPage() {
             Ready to make a difference?
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-brand-muted-sage">
-            Browse verified cases and give directly to someone's recovery. Every amount counts — even ₦1,000 can cover a day of medication.
+            Browse verified cases and give directly to someone&apos;s recovery. Every amount counts — even ₦1,000 can cover a day of medication.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Link
