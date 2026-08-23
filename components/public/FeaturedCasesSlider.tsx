@@ -38,6 +38,21 @@ export function FeaturedCasesSlider({ cases }: { cases: CaseSummary[] }) {
           transition={{ duration: 0.45, ease: "easeInOut" }}
           className="grid min-h-[340px] lg:grid-cols-[1fr_44%]"
         >
+          {/* Mobile/tablet image strip */}
+          <div className="relative h-48 overflow-hidden lg:hidden">
+            {c.cover_image_url ? (
+              <Image
+                src={c.cover_image_url}
+                alt={c.title}
+                fill
+                className="object-cover"
+              />
+            ) : (
+              <CasePlaceholder seed={c.id} />
+            )}
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-brand-forest/20 to-brand-forest" />
+          </div>
+
           {/* Content */}
           <div className="flex flex-col justify-between gap-6 p-8 lg:p-12">
             <div>
