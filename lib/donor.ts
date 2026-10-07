@@ -1,15 +1,28 @@
 import { listPublishedCases, type CaseSummary } from "@/lib/cases";
 import {
   mockActivity,
+  mockDonations,
   mockDonor,
+  mockPaymentMethod,
+  mockRecurringAmount,
   mockStoryRelations,
   mockTopDonations,
   type ActivityGroup,
+  type Donation,
   type Donor,
+  type PaymentMethod,
   type TopDonation,
 } from "@/lib/mock/donor";
 
-export type { ActivityGroup, ActivityItem, ActivityItemType, Donor, TopDonation } from "@/lib/mock/donor";
+export type {
+  ActivityGroup,
+  ActivityItem,
+  ActivityItemType,
+  Donation,
+  Donor,
+  PaymentMethod,
+  TopDonation,
+} from "@/lib/mock/donor";
 
 // Data-access layer for the donor dashboard. Mock-backed for now; swap the
 // bodies for Supabase queries when auth lands — signatures stay the same.
@@ -42,4 +55,40 @@ export async function getMyStories(filter: MyStoriesFilter = "all"): Promise<MyS
   if (filter === "donated") return stories.filter((s) => s.donatedAmount > 0);
   if (filter === "following") return stories.filter((s) => s.following);
   return stories;
+}
+
+export type DonationSummary = {
+  totalPaid: number;
+  currency: string;
+  firstDonationAt: string | null;
+  pendingCount: number;
+  nextDueAmount: number;
+  nextPaymentDate: string;
+  paymentMethod: PaymentMethod;
+};
+
+export async function getDonations(): Promise<Donation[]> {
+  return [...mockDonations].sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+}
+
+// Recurring gifts fall on the 17th; next due is the upcoming 17th.
+function nextMonthlyDate(day = 17) {
+  const now = new Date();
+  const d = new Date(now.getFullYear(), now.getMonth(), day);
+  if (d <= now) d.setMonth(d.getMonth() + 1);
+  return d.toISOString();
+}
+
+export async function getDonationSummary(): Promise<DonationSummary> {
+  const paid = mockDonations.filter((d) => d.status === "paid");
+  const first = [...paid].sort((a, b) => a.createdAt.localeCompare(b.createdAt))[0];
+  return {
+    totalPaid: paid.reduce((sum, d) => sum + d.amount, 0),
+    currency: "NGN",
+    firstDonationAt: first?.createdAt ?? null,
+    pendingCount: mockDonations.filter((d) => d.status === "pending").length,
+    nextDueAmount: mockRecurringAmount,
+    nextPaymentDate: nextMonthlyDate(),
+    paymentMethod: mockPaymentMethod,
+  };
 }

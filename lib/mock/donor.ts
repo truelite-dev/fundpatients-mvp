@@ -109,3 +109,48 @@ export const mockStoryRelations: StoryRelation[] = [
   { donatedAmount: 0, following: true },
   { donatedAmount: 15_000, following: false },
 ];
+
+export type DonationStatus = "paid" | "pending";
+export type DonationFrequency = "one-time" | "recurring";
+
+export type Donation = {
+  id: string;
+  amount: number;
+  currency: string;
+  status: DonationStatus;
+  frequency: DonationFrequency;
+  caseTitle: string | null; // null = general donation
+  caseHref: string | null;
+  method: string;
+  createdAt: string;
+};
+
+export type PaymentMethod = { brand: string; last4: string; expiry: string };
+
+// Paid donations sum to mockDonor.totalDonated.
+export const mockDonations: Donation[] = [
+  {
+    id: "d1", amount: 1_000_000, currency: "NGN", status: "paid", frequency: "one-time",
+    caseTitle: "Help Jennifer Regain Her Health", caseHref: "/stories",
+    method: "Visa •••• 0409", createdAt: "2026-03-22T20:55:00.000Z",
+  },
+  {
+    id: "d2", amount: 5_000, currency: "NGN", status: "pending", frequency: "one-time",
+    caseTitle: null, caseHref: null, method: "Mastercard ••••", createdAt: "2026-03-22T20:50:00.000Z",
+  },
+  {
+    id: "d3", amount: 5_000, currency: "NGN", status: "pending", frequency: "one-time",
+    caseTitle: null, caseHref: null, method: "Mastercard ••••", createdAt: "2026-03-05T10:04:00.000Z",
+  },
+  {
+    id: "d4", amount: 150_000, currency: "NGN", status: "paid", frequency: "recurring",
+    caseTitle: null, caseHref: null, method: "Visa •••• 0409", createdAt: "2026-02-17T19:56:00.000Z",
+  },
+  {
+    id: "d5", amount: 100_000, currency: "NGN", status: "paid", frequency: "recurring",
+    caseTitle: null, caseHref: null, method: "Visa •••• 0409", createdAt: "2026-01-17T09:30:00.000Z",
+  },
+];
+
+export const mockPaymentMethod: PaymentMethod = { brand: "Visa", last4: "0409", expiry: "01/30" };
+export const mockRecurringAmount = 150_000;
