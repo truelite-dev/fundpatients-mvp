@@ -166,3 +166,19 @@ export const mockNotificationSettings: NotificationSettings = {
   update: true,
   donation: true,
 };
+
+export type Profile = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  bio: string;
+  social: { facebook: string; twitter: string; linkedin: string };
+};
+
+export const mockProfile: Profile = {
+  firstName: mockDonor.firstName,
+  lastName: mockDonor.lastName,
+  email: mockDonor.email,
+  bio: "",
+  social: { facebook: "", twitter: "", linkedin: "" },
+};
