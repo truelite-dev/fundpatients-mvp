@@ -5,6 +5,7 @@ export type Donor = {
   id: string;
   firstName: string;
   lastName: string;
+  email: string;
   memberSince: string;
   totalDonated: number;
   currency: string;
@@ -45,6 +46,7 @@ export const mockDonor: Donor = {
   id: "donor-1",
   firstName: "Temisan",
   lastName: "James",
+  email: "temisan.james@example.com",
   memberSince: "2026-01-15T00:00:00.000Z",
   totalDonated: 1_250_000,
   currency: "NGN",
