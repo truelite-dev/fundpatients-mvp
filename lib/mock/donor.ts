@@ -96,3 +96,16 @@ export const mockActivity: ActivityGroup[] = [
 ];
 
 export const mockTopDonations: TopDonation[] = [];
+
+// Mock donor↔story relationships, applied in order to the first published
+// cases so "My stories" links to real /stories/[caseId] pages.
+export type StoryRelation = { donatedAmount: number; following: boolean };
+
+export const mockStoryRelations: StoryRelation[] = [
+  { donatedAmount: 100_000, following: true },
+  { donatedAmount: 50_000, following: false },
+  { donatedAmount: 0, following: true },
+  { donatedAmount: 25_000, following: true },
+  { donatedAmount: 0, following: true },
+  { donatedAmount: 15_000, following: false },
+];

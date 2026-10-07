@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { Gift, Home, Settings, Star, User } from "lucide-react";
 import { DonationTotal } from "@/components/dashboard/DonationTotal";
 import type { Donor } from "@/lib/donor";
@@ -9,7 +9,7 @@ import type { Donor } from "@/lib/donor";
 const primaryNav = [
   { href: "/users/overview", label: "All Updates", icon: Home },
   { href: "/users/donations", label: "Donations", icon: Gift },
-  { href: "/users/following", label: "Following", icon: Star },
+  { href: "/users/stories?filter=following", label: "Following", icon: Star },
 ];
 const secondaryNav = [
   { href: "/users/settings", label: "Settings", icon: Settings },
@@ -22,9 +22,11 @@ function memberSince(iso: string) {
 
 export function DonorSidebar({ donor }: { donor: Donor }) {
   const pathname = usePathname();
+  const filter = useSearchParams().get("filter");
 
   function NavLink({ href, label, icon: Icon }: (typeof primaryNav)[number]) {
-    const active = pathname === href;
+    const [path, query] = href.split("?");
+    const active = query ? pathname === path && query === `filter=${filter}` : pathname === path;
     return (
       <Link
         href={href}

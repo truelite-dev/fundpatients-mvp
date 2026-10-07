@@ -1,5 +1,6 @@
-import { ComingSoon } from "@/components/dashboard/ComingSoon";
+import { redirect } from "next/navigation";
 
-export default function Page() {
-  return <ComingSoon title="Following" subtitle="Stories I am following" />;
+// Followed stories live in My stories under the Following filter.
+export default function FollowingPage() {
+  redirect("/users/stories?filter=following");
 }
