@@ -8,7 +8,14 @@ import { safeNext } from "@/lib/auth/safeNext";
 
 function LoginForm() {
   const router = useRouter();
-  const next = useSearchParams().get("next");
+  const params = useSearchParams();
+  const next = params.get("next");
+  const notice =
+    params.get("error") === "link_invalid"
+      ? { tone: "error", text: "That confirmation link is invalid or has expired. Log in, or register again." }
+      : params.get("registered")
+        ? { tone: "info", text: "Account created. If you were sent a confirmation email, confirm it first, then log in." }
+        : null;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -38,6 +45,15 @@ function LoginForm() {
       <p className="mt-1 text-sm text-brand-muted-sage">
         Tell your story, make a donation or become a partner
       </p>
+
+      {notice && (
+        <p
+          role={notice.tone === "error" ? "alert" : "status"}
+          className={`mt-4 rounded-md px-3 py-2 text-sm ${notice.tone === "error" ? "bg-red-50 text-red-700" : "bg-brand-soft-sage text-brand-forest"}`}
+        >
+          {notice.text}
+        </p>
+      )}
 
       <form onSubmit={handleSubmit} className="mt-6 flex flex-col gap-4">
         <label className="flex flex-col gap-1 text-sm">

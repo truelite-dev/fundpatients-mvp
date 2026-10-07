@@ -1,9 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
-export default function ForgotPasswordPage() {
+function ForgotPasswordForm() {
+  const linkInvalid = useSearchParams().get("error") === "link_invalid";
   const [email, setEmail] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -16,7 +18,7 @@ export default function ForgotPasswordPage() {
 
     const supabase = createClient();
     const { error: resetError } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/reset-password`,
+      redirectTo: `${window.location.origin}/auth/callback?next=/reset-password`,
     });
 
     if (resetError) {
@@ -34,6 +36,12 @@ export default function ForgotPasswordPage() {
       <h1 className="font-display text-2xl font-semibold text-brand-forest">
         Reset your password
       </h1>
+
+      {linkInvalid && !sent && (
+        <p role="alert" className="mt-4 rounded-md bg-red-50 px-3 py-2 text-sm text-red-700">
+          That reset link is invalid or has expired. Enter your email to get a new one.
+        </p>
+      )}
 
       {sent ? (
         <p className="mt-4 text-sm text-brand-muted-sage">
@@ -62,5 +70,14 @@ export default function ForgotPasswordPage() {
         </form>
       )}
     </div>
+  );
+}
+
+export default function ForgotPasswordPage() {
+  // useSearchParams needs a Suspense boundary for static prerendering.
+  return (
+    <Suspense fallback={null}>
+      <ForgotPasswordForm />
+    </Suspense>
   );
 }
