@@ -3,6 +3,7 @@ import {
   mockActivity,
   mockDonations,
   mockDonor,
+  mockNotificationSettings,
   mockPaymentMethod,
   mockRecurringAmount,
   mockStoryRelations,
@@ -10,6 +11,7 @@ import {
   type ActivityGroup,
   type Donation,
   type Donor,
+  type NotificationSettings,
   type PaymentMethod,
   type TopDonation,
 } from "@/lib/mock/donor";
@@ -20,6 +22,8 @@ export type {
   ActivityItemType,
   Donation,
   Donor,
+  NotificationKey,
+  NotificationSettings,
   PaymentMethod,
   TopDonation,
 } from "@/lib/mock/donor";
@@ -91,4 +95,12 @@ export async function getDonationSummary(): Promise<DonationSummary> {
     nextPaymentDate: nextMonthlyDate(),
     paymentMethod: mockPaymentMethod,
   };
+}
+
+export async function getNotificationSettings(): Promise<NotificationSettings> {
+  return mockNotificationSettings;
+}
+
+export async function getPaymentMethod(): Promise<PaymentMethod> {
+  return mockPaymentMethod;
 }
