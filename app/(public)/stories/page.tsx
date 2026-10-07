@@ -11,18 +11,27 @@ const PER_PAGE = 12;
 export default async function StoriesPage({
   searchParams,
 }: {
-  searchParams: Promise<{ recurring?: string; page?: string }>;
+  searchParams: Promise<{ recurring?: string; page?: string; q?: string }>;
 }) {
-  const { recurring, page: pageParam } = await searchParams;
+  const { recurring, page: pageParam, q: rawQuery } = await searchParams;
+  const query = rawQuery?.trim().toLowerCase() ?? "";
   const page = Math.max(1, parseInt(pageParam ?? "1", 10) || 1);
 
-  const [featuredCases, allCases] = await Promise.all([
+  const [almostFunded, allCases] = await Promise.all([
     listAlmostFundedCases(5),
     listPublishedCases(),
   ]);
 
+  // While searching, show every match in the grid and drop the featured slider.
+  const featuredCases = query ? [] : almostFunded;
   const featuredIds = new Set(featuredCases.map((c) => c.id));
-  const remainingCases = allCases.filter((c) => !featuredIds.has(c.id));
+  const remainingCases = allCases
+    .filter((c) => !featuredIds.has(c.id))
+    .filter(
+      (c) =>
+        !query ||
+        [c.title, c.description, c.location ?? ""].some((f) => f.toLowerCase().includes(query))
+    );
 
   const totalPages = Math.max(1, Math.ceil(remainingCases.length / PER_PAGE));
   const currentPage = Math.min(page, totalPages);
@@ -31,6 +40,7 @@ export default async function StoriesPage({
   function pageHref(p: number) {
     const params = new URLSearchParams();
     if (recurring === "true") params.set("recurring", "true");
+    if (rawQuery?.trim()) params.set("q", rawQuery.trim());
     if (p > 1) params.set("page", String(p));
     const qs = params.toString();
     return `/stories${qs ? `?${qs}` : ""}`;
@@ -44,8 +54,26 @@ export default async function StoriesPage({
         </div>
       )}
 
+      {query && (
+        <div className="mt-10 flex flex-wrap items-baseline justify-between gap-2">
+          <h1 className="font-display text-2xl font-semibold text-brand-forest">
+            {remainingCases.length} {remainingCases.length === 1 ? "result" : "results"} for “
+            {rawQuery?.trim()}”
+          </h1>
+          <Link href="/stories" className="text-sm font-medium text-brand-deep-green hover:underline">
+            Clear search
+          </Link>
+        </div>
+      )}
+
+      {query && remainingCases.length === 0 && (
+        <p className="mt-6 rounded-2xl bg-brand-soft-sage px-6 py-10 text-center text-sm text-brand-muted-sage">
+          No stories match your search. Try a different name, condition or location.
+        </p>
+      )}
+
       {pageCases.length > 0 && (
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className={`${query ? "mt-6" : "mt-10"} grid gap-6 sm:grid-cols-2 lg:grid-cols-3`}>
           {pageCases.map((c) => (
             <CaseCard key={c.id} case={c} recurring={recurring === "true"} />
           ))}
