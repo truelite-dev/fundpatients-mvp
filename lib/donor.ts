@@ -5,6 +5,7 @@ import {
   mockDonor,
   mockNotificationSettings,
   mockPaymentMethod,
+  mockProfile,
   mockRecurringAmount,
   mockStoryRelations,
   mockTopDonations,
@@ -13,6 +14,7 @@ import {
   type Donor,
   type NotificationSettings,
   type PaymentMethod,
+  type Profile,
   type TopDonation,
 } from "@/lib/mock/donor";
 
@@ -25,6 +27,7 @@ export type {
   NotificationKey,
   NotificationSettings,
   PaymentMethod,
+  Profile,
   TopDonation,
 } from "@/lib/mock/donor";
 
@@ -103,4 +106,8 @@ export async function getNotificationSettings(): Promise<NotificationSettings> {
 
 export async function getPaymentMethod(): Promise<PaymentMethod> {
   return mockPaymentMethod;
+}
+
+export async function getProfile(): Promise<Profile> {
+  return mockProfile;
 }
