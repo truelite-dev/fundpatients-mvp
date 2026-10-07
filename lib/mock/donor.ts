@@ -154,3 +154,15 @@ export const mockDonations: Donation[] = [
 
 export const mockPaymentMethod: PaymentMethod = { brand: "Visa", last4: "0409", expiry: "01/30" };
 export const mockRecurringAmount = 150_000;
+
+export type NotificationKey = "comment" | "follow" | "reaction" | "share" | "update" | "donation";
+export type NotificationSettings = Record<NotificationKey, boolean>;
+
+export const mockNotificationSettings: NotificationSettings = {
+  comment: true,
+  follow: true,
+  reaction: false,
+  share: true,
+  update: true,
+  donation: true,
+};
