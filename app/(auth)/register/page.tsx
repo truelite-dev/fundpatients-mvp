@@ -24,7 +24,11 @@ function RegisterForm() {
     const { error: signUpError } = await supabase.auth.signUp({
       email,
       password,
-      options: { data: { full_name: fullName } },
+      options: {
+        data: { full_name: fullName },
+        // Confirmation links land on the callback, then continue to `next`.
+        emailRedirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(safeNext(next))}`,
+      },
     });
 
     if (signUpError) {

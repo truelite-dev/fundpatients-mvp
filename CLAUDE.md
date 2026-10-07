@@ -38,6 +38,8 @@ Sourced from `docs/Fund_Patients_Cheatsheet.pdf` (brand cheatsheet). Defined in 
 - `getDonorSession()` / `getProfile()` in `lib/donor.ts` read the real user + `profiles.full_name` and `redirect('/login')` if there is no session (second line of defense behind the proxy). Donations, activity and stories are still mock data.
 - Logout is `components/dashboard/LogoutButton.tsx` (`supabase.auth.signOut()`).
 - No role gating yet: any signed-in user can open the donor dashboard.
+- **Email links** (signup confirmation, password recovery) go through `app/auth/callback/route.ts`: Supabase redirects there with a PKCE `?code=`, the route exchanges it for a session (cookies) and redirects to `safeNext(?next)`. Failures (`?error=`, missing/used/expired code) redirect to `/login?error=link_invalid` (or `/forgot-password?error=link_invalid` when `next` is `/reset-password`). The exchange needs the PKCE verifier cookie, so links must be opened in the **same browser** that started the flow.
+- **Hosted Supabase setup (dashboard, not in code):** Authentication → URL Configuration must list every origin's `/auth/callback` (production, Vercel preview wildcard, `http://localhost:3001`) under Redirect URLs, with the Site URL set to production — otherwise Supabase ignores `redirectTo`/`emailRedirectTo` and email links land on the Site URL.
 
 ## Local Supabase (auth testing)
 
@@ -46,7 +48,7 @@ Sourced from `docs/Fund_Patients_Cheatsheet.pdf` (brand cheatsheet). Defined in 
 supabase start && supabase db reset     # applies supabase/migrations + supabase/seed.sql
 supabase stop                           # when done
 ```
-`supabase/seed.sql` seeds one test donor (credentials are in that file's header). Run the app against it with the `fundpatients-local-supabase` entry in `.claude/launch.json` (port 3002, env pulled from `supabase status`, separate `.next-local` dist dir via `NEXT_DIST_DIR`).
+`supabase/seed.sql` seeds one test donor (credentials are in that file's header). Local emails (confirmation/recovery) are caught by Mailpit at http://127.0.0.1:54424; confirmations are off by default (`[auth.email] enable_confirmations`), turn them on to test the signup email flow. Run the app against it with the `fundpatients-local-supabase` entry in `.claude/launch.json` (port 3002, env pulled from `supabase status`, separate `.next-local` dist dir via `NEXT_DIST_DIR`).
 
 ## Planning docs
 
