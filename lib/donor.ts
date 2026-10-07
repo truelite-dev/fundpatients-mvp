@@ -1,4 +1,7 @@
+import { cache } from "react";
+import { redirect } from "next/navigation";
 import { listPublishedCases, type CaseSummary } from "@/lib/cases";
+import { createClient } from "@/lib/supabase/server";
 import {
   mockActivity,
   mockDonations,
@@ -34,8 +37,35 @@ export type {
 // Data-access layer for the donor dashboard. Mock-backed for now; swap the
 // bodies for Supabase queries when auth lands — signatures stay the same.
 
+// The signed-in user + their profile name. Deduped per request; redirects to
+// /login when there's no session (the proxy already gates /users/*, this is
+// the second line of defense).
+const getCurrentUser = cache(async () => {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) redirect("/login");
+
+  const { data: profile } = await supabase.from("profiles").select("full_name").eq("id", user.id).maybeSingle();
+  const email = user.email ?? "";
+  const fullName = (profile?.full_name ?? user.user_metadata?.full_name ?? "").trim();
+  const [first = "", ...rest] = fullName ? fullName.split(/\s+/) : [email.split("@")[0]];
+
+  return { id: user.id, email, createdAt: user.created_at, firstName: first, lastName: rest.join(" ") };
+});
+
 export async function getDonorSession(): Promise<Donor> {
-  return mockDonor;
+  const u = await getCurrentUser();
+  // Identity is real; totals/activity are still mock until donations are wired.
+  return {
+    ...mockDonor,
+    id: u.id,
+    firstName: u.firstName,
+    lastName: u.lastName,
+    email: u.email,
+    memberSince: u.createdAt,
+  };
 }
 
 export async function getDonorActivity(): Promise<ActivityGroup[]> {
@@ -109,5 +139,6 @@ export async function getPaymentMethod(): Promise<PaymentMethod> {
 }
 
 export async function getProfile(): Promise<Profile> {
-  return mockProfile;
+  const u = await getCurrentUser();
+  return { ...mockProfile, firstName: u.firstName, lastName: u.lastName, email: u.email };
 }

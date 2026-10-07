@@ -1,12 +1,14 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { Suspense, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
+import { safeNext } from "@/lib/auth/safeNext";
 
-export default function RegisterPage() {
+function RegisterForm() {
   const router = useRouter();
+  const next = useSearchParams().get("next");
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -31,7 +33,10 @@ export default function RegisterPage() {
       return;
     }
 
-    router.push("/login?registered=1");
+    const params = new URLSearchParams({ registered: "1" });
+    // Only forward a vetted same-origin path.
+    if (next && safeNext(next, "") !== "") params.set("next", next);
+    router.push(`/login?${params}`);
   }
 
   return (
@@ -86,10 +91,21 @@ export default function RegisterPage() {
 
       <p className="mt-4 text-sm text-brand-muted-sage">
         Already have an account?{" "}
-        <Link href="/login" className="text-brand-deep-green">
+        <Link
+          href={next ? `/login?next=${encodeURIComponent(next)}` : "/login"}
+          className="text-brand-deep-green"
+        >
           Login
         </Link>
       </p>
     </div>
+  );
+}
+
+export default function RegisterPage() {
+  return (
+    <Suspense fallback={null}>
+      <RegisterForm />
+    </Suspense>
   );
 }
