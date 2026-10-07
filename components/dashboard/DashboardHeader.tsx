@@ -9,6 +9,7 @@ import type { Donor } from "@/lib/donor";
 
 const storiesMenu = [
   { href: "/stories", label: "Discover stories" },
+  { href: "/users/stories", label: "My stories" },
   { href: "/request-help", label: "New story — Request help" },
 ];
 
@@ -136,7 +137,7 @@ export function DashboardHeader({ donor }: { donor: Donor }) {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const storiesActive = pathname.startsWith("/stories");
+  const storiesActive = pathname.startsWith("/stories") || pathname === "/users/stories";
 
   return (
     <header className="sticky top-3 z-50 mx-[12px] mt-3 rounded-2xl bg-background/70 shadow-[0_8px_24px_-8px_rgba(11,31,14,0.10)] backdrop-blur-lg sm:mx-[20px] md:top-4 md:mt-0">
@@ -147,7 +148,7 @@ export function DashboardHeader({ donor }: { donor: Donor }) {
           </Link>
 
           <nav className="hidden items-center gap-6 text-base text-brand-forest lg:flex">
-            <Link href="/users/overview" className={linkClass(pathname.startsWith("/users"))}>
+            <Link href="/users/overview" className={linkClass(pathname.startsWith("/users") && pathname !== "/users/stories")}>
               Home
             </Link>
 
@@ -258,6 +259,7 @@ export function DashboardHeader({ donor }: { donor: Donor }) {
           {[
             { href: "/users/overview", label: "Home" },
             { href: "/stories", label: "Discover stories" },
+            { href: "/users/stories", label: "My stories" },
             { href: "/about", label: "Why FundPatients?" },
             { href: "/partners", label: "Partners" },
           ].map((link) => (
