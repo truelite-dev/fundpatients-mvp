@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { ChevronDown, LayoutDashboard, LogOut, Menu, Search, Settings, User, X } from "lucide-react";
+import { LogoutButton } from "@/components/dashboard/LogoutButton";
 import type { Donor } from "@/lib/donor";
 
 const storiesMenu = [
@@ -228,16 +229,14 @@ export function DashboardHeader({ donor }: { donor: Donor }) {
                     </Link>
                   ))}
                 </div>
-                {/* Mock phase: there is no real session, so Logout just returns to /login. */}
-                <Link
-                  href="/login"
+                <LogoutButton
                   role="menuitem"
-                  onClick={close}
-                  className="flex items-center gap-3 rounded-xl border-t border-border px-3 py-2 pt-3 text-sm text-red-600 transition hover:bg-red-50"
+                  onDone={close}
+                  className="flex w-full items-center gap-3 rounded-xl border-t border-border px-3 py-2 pt-3 text-sm text-red-600 transition hover:bg-red-50 disabled:opacity-60"
                 >
                   <LogOut className="h-4 w-4" />
                   Logout
-                </Link>
+                </LogoutButton>
               </>
             )}
           </Dropdown>
@@ -287,13 +286,12 @@ export function DashboardHeader({ donor }: { donor: Donor }) {
             >
               Donate
             </Link>
-            <Link
-              href="/login"
-              onClick={() => setMobileOpen(false)}
-              className="rounded-full border border-red-200 px-4 py-2 text-center text-sm text-red-600"
+            <LogoutButton
+              onDone={() => setMobileOpen(false)}
+              className="rounded-full border border-red-200 px-4 py-2 text-center text-sm text-red-600 disabled:opacity-60"
             >
               Logout
-            </Link>
+            </LogoutButton>
           </div>
         </div>
       )}

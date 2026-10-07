@@ -30,6 +30,24 @@ Sourced from `docs/Fund_Patients_Cheatsheet.pdf` (brand cheatsheet). Defined in 
 - **WaysToDonate**: avatar stack (`AvatarStack.tsx`) sits between subtitle and card grid at 85% width; cards hug content (no fixed height).
 - **Animations**: always use `Reveal` wrapper for sections. Import from `motion/react` (not `framer-motion`).
 
+## Auth gating
+
+`/users/*` (the logged-in donor dashboard) requires a Supabase session:
+- `proxy.ts` -> `lib/supabase/middleware.ts` redirects logged-out requests to `/login?next=<path+query>`, and fails closed (also redirects) if Supabase env vars are missing. Signed-in users hitting `/login`, `/register` or `/forgot-password` are sent to `next` (or `/users/overview`).
+- `lib/auth/safeNext.ts` is the only place `next` is validated (same-origin paths only) — use it for any post-login redirect.
+- `getDonorSession()` / `getProfile()` in `lib/donor.ts` read the real user + `profiles.full_name` and `redirect('/login')` if there is no session (second line of defense behind the proxy). Donations, activity and stories are still mock data.
+- Logout is `components/dashboard/LogoutButton.tsx` (`supabase.auth.signOut()`).
+- No role gating yet: any signed-in user can open the donor dashboard.
+
+## Local Supabase (auth testing)
+
+`.env.local` points at the **hosted** project; never create test accounts there. A separate local stack lives in `supabase/config.toml` (`project_id = "fundpatients"`, ports 544xx so it can run beside other Supabase projects on the defaults):
+```
+supabase start && supabase db reset     # applies supabase/migrations + supabase/seed.sql
+supabase stop                           # when done
+```
+`supabase/seed.sql` seeds one test donor (credentials are in that file's header). Run the app against it with the `fundpatients-local-supabase` entry in `.claude/launch.json` (port 3002, env pulled from `supabase status`, separate `.next-local` dist dir via `NEXT_DIST_DIR`).
+
 ## Planning docs
 
 Feature plans (from Claude Code's plan mode) get written to `docs/fundpatient-<feature>.md` (e.g. `docs/fundpatient-homepage.md`, `docs/fundpatient-stories-page.md`) instead of only living in the ephemeral, single-slot plan-mode file — that file gets overwritten every time a new plan is drafted, so anything worth keeping needs to land here. Write/update the relevant `docs/fundpatient-*.md` as the durable copy once a plan is agreed, alongside (not instead of) the plan-mode file.

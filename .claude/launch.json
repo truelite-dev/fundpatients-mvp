@@ -4,9 +4,21 @@
     {
       "name": "fundpatients-mvp",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
+      "runtimeArgs": [
+        "run",
+        "dev"
+      ],
       "port": 3001,
       "autoPort": true
+    },
+    {
+      "name": "fundpatients-local-supabase",
+      "runtimeExecutable": "bash",
+      "runtimeArgs": [
+        "-c",
+        "eval \"$(supabase status -o env | sed 's/^/export /')\"; NEXT_DIST_DIR=.next-local NEXT_PUBLIC_SUPABASE_URL=$API_URL NEXT_PUBLIC_SUPABASE_ANON_KEY=$ANON_KEY SUPABASE_SERVICE_ROLE_KEY=$SERVICE_ROLE_KEY npm run dev -- -p 3002"
+      ],
+      "port": 3002
     }
   ]
 }

@@ -1,8 +1,8 @@
 "use client";
 
 import { useRef, useState } from "react";
-import Link from "next/link";
 import { Check, LogOut, Pencil, X } from "lucide-react";
+import { LogoutButton } from "@/components/dashboard/LogoutButton";
 import type { Profile } from "@/lib/donor";
 
 const MAX_PHOTO_BYTES = 2 * 1024 * 1024;
@@ -158,14 +158,10 @@ export function ProfileForm({ initial }: { initial: Profile }) {
                 <Pencil className="h-4 w-4" />
                 Edit
               </button>
-              {/* Mock phase: no real session, so Logout returns to /login. */}
-              <Link
-                href="/login"
-                className="inline-flex items-center gap-2 rounded-full border border-red-200 bg-red-50 px-4 py-2 text-sm font-medium text-red-600 transition hover:bg-red-100"
-              >
+              <LogoutButton className="inline-flex items-center gap-2 rounded-full border border-red-200 bg-red-50 px-4 py-2 text-sm font-medium text-red-600 transition hover:bg-red-100 disabled:opacity-60">
                 <LogOut className="h-4 w-4" />
                 Logout
-              </Link>
+              </LogoutButton>
             </>
           )}
         </div>
