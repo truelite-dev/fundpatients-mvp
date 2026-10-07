@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { ChevronDown, LayoutDashboard, LogOut, Menu, Search, Settings, User, X } from "lucide-react";
 import type { Donor } from "@/lib/donor";
 
@@ -80,6 +80,58 @@ function Avatar({ donor }: { donor: Donor }) {
   );
 }
 
+function SearchBox() {
+  const router = useRouter();
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  function submit(e: React.FormEvent) {
+    e.preventDefault();
+    const q = value.trim();
+    if (!open) {
+      setOpen(true);
+      requestAnimationFrame(() => inputRef.current?.focus());
+      return;
+    }
+    if (q) router.push(`/stories?q=${encodeURIComponent(q)}`);
+    else setOpen(false);
+  }
+
+  return (
+    <form
+      onSubmit={submit}
+      role="search"
+      className={`flex items-center rounded-full border transition-colors ${
+        open ? "border-brand-deep-green" : "border-border hover:border-brand-deep-green"
+      }`}
+    >
+      <button
+        type="submit"
+        aria-label="Search a case"
+        className="shrink-0 rounded-full p-2 text-brand-muted-sage transition hover:text-brand-deep-green"
+      >
+        <Search className="h-4 w-4" />
+      </button>
+      <div
+        className={`overflow-hidden transition-all duration-200 ${open ? "w-44 pr-2 opacity-100" : "w-0 opacity-0"}`}
+      >
+        <input
+          ref={inputRef}
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          onKeyDown={(e) => e.key === "Escape" && setOpen(false)}
+          onBlur={() => !value && setOpen(false)}
+          tabIndex={open ? 0 : -1}
+          aria-label="Search a case"
+          placeholder="Search a case"
+          className="w-full bg-transparent text-sm text-brand-forest outline-none placeholder:text-brand-muted-sage"
+        />
+      </div>
+    </form>
+  );
+}
+
 export function DashboardHeader({ donor }: { donor: Donor }) {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -132,13 +184,7 @@ export function DashboardHeader({ donor }: { donor: Donor }) {
         </div>
 
         <div className="hidden items-center gap-3 text-sm lg:flex">
-          <Link
-            href="/stories"
-            aria-label="Search stories"
-            className="rounded-full border border-border p-2 text-brand-muted-sage transition hover:border-brand-deep-green hover:text-brand-deep-green"
-          >
-            <Search className="h-4 w-4" />
-          </Link>
+          <SearchBox />
           <Link href="/request-help" className="whitespace-nowrap rounded-full border border-border px-4 py-2">
             Request Help
           </Link>
