@@ -40,7 +40,7 @@ export function Testimonials() {
 
       <div className="relative mx-auto w-full max-w-3xl">
         {/* Eyebrow */}
-        <p className="text-center text-xs font-semibold tracking-widest text-brand-deep-green uppercase">
+        <p className="text-center font-serif text-2xl text-brand-deep-green italic sm:text-3xl">
           Testimonials
         </p>
 

@@ -33,7 +33,7 @@ export function HowItWorks() {
 
       <div className="relative mx-auto max-w-5xl">
         <div className="text-center">
-          <p className="text-xs font-semibold tracking-widest text-brand-mint uppercase">
+          <p className="font-serif text-2xl text-brand-mint italic sm:text-3xl">
             How it works
           </p>
           <h2 className="mt-3 font-display text-3xl font-semibold leading-tight text-white sm:text-4xl lg:text-5xl">

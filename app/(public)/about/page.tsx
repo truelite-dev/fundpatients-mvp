@@ -35,51 +35,6 @@ const values = [
   },
 ];
 
-const team = [
-  {
-    name: "Adaeze Okonkwo",
-    role: "Co-founder & CEO",
-    bio: "Former health-tech product lead at Helium Health. Adaeze started FundPatients after watching her cousin's cancer treatment stall because the family couldn't pay upfront.",
-    initials: "AO",
-    color: "bg-brand-soft-sage text-brand-deep-green",
-  },
-  {
-    name: "Tunde Bello",
-    role: "Co-founder & CTO",
-    bio: "Ex-engineering lead at Flutterwave. Tunde architected our payments and medical-partner verification infrastructure — the backbone that keeps every transaction safe.",
-    initials: "TB",
-    color: "bg-brand-forest text-brand-mint",
-  },
-  {
-    name: "Ngozi Eze",
-    role: "Head of Partnerships",
-    bio: "10 years in hospital administration. Ngozi built our network of 62 verified medical institutions and leads the clinical review process for every case on the platform.",
-    initials: "NE",
-    color: "bg-brand-deep-green text-white",
-  },
-  {
-    name: "Emeka Nwachukwu",
-    role: "Head of Operations",
-    bio: "Operations veteran from Access Bank's foundation arm. Emeka ensures funds move within 24 hours of a case being approved and that every patient receives timely follow-up.",
-    initials: "EN",
-    color: "bg-brand-soft-sage text-brand-deep-green",
-  },
-  {
-    name: "Fatima Sule",
-    role: "Community & Trust",
-    bio: "Worked with USAID on healthcare equity programmes across West Africa. Fatima leads donor trust, case storytelling, and everything that makes FundPatients feel human.",
-    initials: "FS",
-    color: "bg-brand-forest text-brand-mint",
-  },
-  {
-    name: "Chike Obi",
-    role: "Design & Product",
-    bio: "Former designer at Paystack. Chike obsesses over making the donation experience feel as light and trustworthy as possible — every pixel here is his fault.",
-    initials: "CO",
-    color: "bg-brand-deep-green text-white",
-  },
-];
-
 const milestones = [
   { year: "2021", event: "FundPatients founded after a personal experience with medical fundraising in Lagos." },
   { year: "2022", event: "First 100 cases funded. Partnered with 8 hospitals across Lagos and Abuja." },
@@ -96,12 +51,12 @@ export default function AboutPage() {
       <section className="relative mx-[12px] mt-8 mb-6 overflow-hidden rounded-3xl bg-[radial-gradient(150%_140%_at_15%_15%,var(--brand-deep-green)_0%,var(--brand-forest)_55%)] px-8 py-20 sm:mx-[20px] sm:px-14 sm:py-28">
         <div aria-hidden className="pointer-events-none absolute -top-24 -right-24 h-72 w-72 rounded-full bg-brand-mint/20 blur-3xl" />
         <div aria-hidden className="pointer-events-none absolute -bottom-32 left-1/3 h-80 w-80 rounded-full bg-brand-mint/10 blur-3xl" />
-        <div className="relative mx-auto max-w-3xl text-center">
-          <span className="inline-block rounded-full bg-brand-mint/15 px-4 py-1.5 text-xs font-semibold tracking-widest text-brand-mint uppercase">
+        <div className="relative mx-auto max-w-5xl text-center">
+          <p className="font-serif text-2xl text-brand-mint italic sm:text-3xl">
             Our mission
-          </span>
-          <h1 className="mt-6 font-display text-4xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl">
-            No one should lose their life<br className="hidden sm:block" /> because they can&apos;t pay for it.
+          </p>
+          <h1 className="mt-3 font-display text-4xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl">
+            No one should lose their life to a bill.
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-white/70 sm:text-xl">
             FundPatients is a Nigerian medical crowdfunding platform that connects patients facing urgent healthcare costs with a community of donors — transparently, safely, and with dignity.
@@ -142,7 +97,7 @@ export default function AboutPage() {
         <section className="mx-[12px] mb-6 overflow-hidden rounded-3xl bg-brand-soft-sage px-8 py-16 sm:mx-[20px] sm:px-14 sm:py-20">
           <div className="mx-auto max-w-5xl lg:grid lg:grid-cols-2 lg:items-center lg:gap-16">
             <div>
-              <p className="text-xs font-semibold tracking-widest text-brand-deep-green uppercase">Our story</p>
+              <p className="font-serif text-2xl text-brand-deep-green italic sm:text-3xl">Our story</p>
               <h2 className="mt-3 font-display text-3xl font-semibold leading-tight text-brand-forest sm:text-4xl">
                 Born from a personal crisis, built for everyone
               </h2>
@@ -180,7 +135,7 @@ export default function AboutPage() {
       <Reveal>
         <section className="mx-auto w-full max-w-5xl px-6 py-16 sm:px-14">
           <div className="text-center">
-            <p className="text-xs font-semibold tracking-widest text-brand-deep-green uppercase">How it works</p>
+            <p className="font-serif text-2xl text-brand-deep-green italic sm:text-3xl">How it works</p>
             <h2 className="mt-3 font-display text-3xl font-semibold leading-tight text-brand-forest sm:text-4xl">
               Transparent from day one
             </h2>
@@ -209,7 +164,7 @@ export default function AboutPage() {
         <section className="mx-[12px] mb-6 overflow-hidden rounded-3xl bg-brand-forest px-8 py-16 sm:mx-[20px] sm:px-14 sm:py-20">
           <div className="mx-auto max-w-5xl">
             <div className="text-center">
-              <p className="text-xs font-semibold tracking-widest text-brand-mint uppercase">What we stand for</p>
+              <p className="font-serif text-2xl text-brand-mint italic sm:text-3xl">What we stand for</p>
               <h2 className="mt-3 font-display text-3xl font-semibold leading-tight text-white sm:text-4xl">Our values</h2>
             </div>
             <div className="mt-12 grid gap-6 sm:grid-cols-2">
@@ -231,53 +186,19 @@ export default function AboutPage() {
       <Reveal>
         <section className="mx-auto w-full max-w-3xl px-6 py-16 sm:px-14">
           <div className="text-center">
-            <p className="text-xs font-semibold tracking-widest text-brand-deep-green uppercase">Our journey</p>
+            <p className="font-serif text-2xl text-brand-deep-green italic sm:text-3xl">Our journey</p>
             <h2 className="mt-3 font-display text-3xl font-semibold leading-tight text-brand-forest sm:text-4xl">
               Four years, one mission
             </h2>
           </div>
           <div className="mt-12 space-y-0">
-            {milestones.map((m, i) => (
+            {milestones.map((m) => (
               <div key={m.year} className="relative flex gap-6 pb-10 last:pb-0">
-                <div className="flex flex-col items-center">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-soft-sage font-display text-sm font-semibold text-brand-deep-green">
-                    {m.year.slice(2)}
-                  </div>
-                  {i < milestones.length - 1 && (
-                    <div className="mt-2 w-px flex-1 bg-border" />
-                  )}
-                </div>
+                <div aria-hidden className="w-px self-stretch bg-brand-deep-green/20" />
                 <div className="pt-1.5 pb-2">
-                  <p className="text-xs font-semibold text-brand-deep-green">{m.year}</p>
+                  <p className="font-serif text-3xl leading-none text-brand-deep-green italic">{m.year}</p>
                   <p className="mt-1 text-sm leading-relaxed text-brand-muted-sage">{m.event}</p>
                 </div>
-              </div>
-            ))}
-          </div>
-        </section>
-      </Reveal>
-
-      {/* ── Team ── */}
-      <Reveal>
-        <section className="mx-auto w-full max-w-5xl px-6 pb-16 sm:px-14">
-          <div className="text-center">
-            <p className="text-xs font-semibold tracking-widest text-brand-deep-green uppercase">The team</p>
-            <h2 className="mt-3 font-display text-3xl font-semibold leading-tight text-brand-forest sm:text-4xl">
-              People who believe healthcare is a right
-            </h2>
-            <p className="mx-auto mt-3 max-w-xl text-brand-muted-sage">
-              We&apos;re a small, passionate team spread across Lagos, Abuja, and Kano — united by one belief: that no one should have to choose between getting better and going broke.
-            </p>
-          </div>
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {team.map((person) => (
-              <div key={person.name} className="rounded-2xl border border-border bg-background p-6">
-                <div className={`flex h-14 w-14 items-center justify-center rounded-full font-display text-lg font-semibold ${person.color}`}>
-                  {person.initials}
-                </div>
-                <h3 className="mt-4 font-display text-lg font-semibold text-brand-forest">{person.name}</h3>
-                <p className="text-xs font-medium text-brand-deep-green">{person.role}</p>
-                <p className="mt-3 text-sm leading-relaxed text-brand-muted-sage">{person.bio}</p>
               </div>
             ))}
           </div>

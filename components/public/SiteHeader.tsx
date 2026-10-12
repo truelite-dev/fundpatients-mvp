@@ -10,6 +10,7 @@ import { Menu, Search, X } from "lucide-react";
 const navLinks = [
   { href: "/stories", label: "Stories" },
   { href: "/about", label: "Why FundPatients?" },
+  { href: "/team", label: "Team" },
   { href: "/partners", label: "Partners" },
 ];
 
