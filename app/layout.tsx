@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, DM_Sans } from "next/font/google";
+import { Bodoni_Moda, Bricolage_Grotesque, DM_Sans } from "next/font/google";
 import "./globals.css";
 
 // Display font — headings (per docs/Fund_Patients_Cheatsheet.pdf).
@@ -7,6 +7,13 @@ const bricolage = Bricolage_Grotesque({
   variable: "--font-bricolage",
   subsets: ["latin"],
   weight: ["500", "600", "700", "800"],
+});
+
+// Editorial accent — italic only, for the occasional emphasised phrase in a heading.
+const bodoni = Bodoni_Moda({
+  variable: "--font-bodoni",
+  subsets: ["latin"],
+  style: ["italic"],
 });
 
 // Body/UI font.
@@ -30,7 +37,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${bricolage.variable} ${dmSans.variable} h-full scroll-smooth antialiased`}>
+    <html lang="en" className={`${bricolage.variable} ${dmSans.variable} ${bodoni.variable} h-full scroll-smooth antialiased`}>
       <body className="min-h-full flex flex-col font-sans">{children}</body>
     </html>
   );

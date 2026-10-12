@@ -17,7 +17,7 @@ export async function StoriesPreview() {
     <section className="w-full bg-gradient-to-b from-white to-[var(--page-background)] pt-14 pb-28 sm:py-28">
       <div className="mx-auto w-full max-w-6xl px-6">
         <div className="text-center">
-          <p className="text-xs font-semibold tracking-widest text-brand-deep-green uppercase">
+          <p className="font-serif text-2xl text-brand-deep-green italic sm:text-3xl">
             Stories
           </p>
           <h2 className="mt-2 font-display text-3xl font-semibold leading-tight text-brand-forest sm:text-4xl lg:text-5xl">

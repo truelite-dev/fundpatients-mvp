@@ -65,6 +65,9 @@ export function HeroCarousel({ cases }: { cases: CaseSummary[] }) {
             <Link href="/about" className="hover:text-white">
               Why FundPatients?
             </Link>
+            <Link href="/team" className="hover:text-white">
+              Team
+            </Link>
             <Link href="/partners" className="hover:text-white">
               Partners
             </Link>

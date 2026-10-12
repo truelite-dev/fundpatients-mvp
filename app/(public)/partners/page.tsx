@@ -25,10 +25,10 @@ export default async function PartnersPage() {
       >
         <div className="mx-auto max-w-[1250px] px-8 py-10 sm:px-14 sm:py-20 lg:grid lg:grid-cols-2 lg:items-center lg:gap-16">
           <div>
-            <span className="inline-block rounded-full bg-brand-mint/15 px-4 py-1.5 text-xs font-semibold tracking-widest text-brand-mint uppercase">
+            <p className="font-serif text-2xl text-brand-mint italic sm:text-3xl">
               Medical network
-            </span>
-            <h1 className="mt-5 font-display text-4xl font-semibold leading-tight text-white sm:text-5xl">
+            </p>
+            <h1 className="mt-3 font-display text-4xl font-semibold leading-tight text-white sm:text-5xl">
               Trusted partners in care
             </h1>
             <p className="mt-5 text-base leading-relaxed text-white/70 sm:text-lg">
@@ -68,11 +68,8 @@ export default async function PartnersPage() {
           <div className="mx-auto max-w-5xl">
             <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
               <div>
-                <p className="text-xs font-semibold tracking-widest text-brand-deep-green uppercase">Verified network</p>
-                <h2 className="mt-2 font-display text-4xl font-semibold text-brand-forest">Our partners</h2>
-                <p className="mt-2 text-brand-muted-sage">
-                  Click any partner to see their profile and active cases.
-                </p>
+                <p className="font-serif text-2xl text-brand-deep-green italic sm:text-3xl">Verified network</p>
+                <h2 className="mt-2 font-display text-4xl font-semibold text-brand-forest">Our certified partners</h2>
               </div>
               <Link
                 href="/partners/become"
@@ -134,7 +131,7 @@ export default async function PartnersPage() {
       <Reveal>
         <section className="mx-auto w-full max-w-5xl px-6 py-16 sm:px-14">
           <div className="text-center">
-            <p className="text-xs font-semibold tracking-widest text-brand-deep-green uppercase">Our process</p>
+            <p className="font-serif text-2xl text-brand-deep-green italic sm:text-3xl">Our process</p>
             <h2 className="mt-3 font-display text-3xl font-semibold text-brand-forest">How we verify partners</h2>
             <p className="mx-auto mt-3 max-w-xl text-brand-muted-sage">
               We don&apos;t just list hospitals — we vet them. Every partner goes through a structured review before a single naira flows through them.
