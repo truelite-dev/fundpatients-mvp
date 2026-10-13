@@ -20,10 +20,10 @@ export default async function PartnersPage() {
 
       {/* ── Hero ── */}
       <section
-        className="mx-[12px] mt-8 mb-6 overflow-hidden rounded-3xl sm:mx-[20px]"
+        className="mx-[12px] mt-8 mb-6 overflow-hidden rounded-3xl px-8 sm:mx-[20px] sm:px-14"
         style={{ background: "linear-gradient(145deg, #1a6b35 0%, #0f3d1d 45%, #071a0d 100%)" }}
       >
-        <div className="mx-auto max-w-[1250px] px-8 py-10 sm:px-14 sm:py-20 lg:grid lg:grid-cols-2 lg:items-center lg:gap-16">
+        <div className="mx-auto max-w-7xl py-10 sm:py-20 lg:grid lg:grid-cols-2 lg:items-center lg:gap-16">
           <div>
             <p className="font-serif text-2xl text-brand-mint italic sm:text-3xl">
               Medical network
