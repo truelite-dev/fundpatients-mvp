@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { motion } from "motion/react";
 import { Menu, Search, X } from "lucide-react";
 
 const navLinks = [
@@ -22,23 +21,8 @@ export function SiteHeader() {
   // — mobile still relies on this one, since that duplicate is desktop-only.
   const isHome = pathname === "/";
 
-  const [isDesktop, setIsDesktop] = useState(
-    () => typeof window !== "undefined" && window.matchMedia("(min-width: 1024px)").matches
-  );
-  const [scrolledPastHero, setScrolledPastHero] = useState(() => {
-    if (typeof window === "undefined") return false;
-    const heroEl = document.getElementById("hero-card");
-    // Default false (header hidden) if hero isn't in DOM yet — effect checks after mount
-    if (!heroEl) return false;
-    return heroEl.getBoundingClientRect().bottom <= 0;
-  });
-
-  useEffect(() => {
-    const mq = window.matchMedia("(min-width: 1024px)");
-    const handleChange = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
-    mq.addEventListener("change", handleChange);
-    return () => mq.removeEventListener("change", handleChange);
-  }, []);
+  // Starts false on server and client alike; the effect below syncs it after mount.
+  const [scrolledPastHero, setScrolledPastHero] = useState(false);
 
   useEffect(() => {
     if (!isHome) return;
@@ -57,18 +41,16 @@ export function SiteHeader() {
 
   // On the homepage's desktop layout, the real header stays tucked away
   // until the hero card has fully scrolled past, then slides in — and
-  // slides back out when scrolling back up into the hero.
-  const hideForHero = isHome && isDesktop && !scrolledPastHero;
+  // slides back out when scrolling back up into the hero. Hiding is done
+  // with lg:-prefixed classes (no JS viewport check), so SSR and the first
+  // client render agree and mobile is never hidden.
+  const hideForHero = isHome && !scrolledPastHero;
 
   return (
-    <motion.header
-      initial={false}
-      animate={{ y: hideForHero ? -96 : 0, opacity: hideForHero ? 0 : 1 }}
-      transition={{ duration: 0.35, ease: "easeOut" }}
-      style={{ pointerEvents: hideForHero ? "none" : "auto" }}
-      className={`top-3 z-50 mt-3 mx-[12px] rounded-2xl bg-background/70 shadow-[0_8px_24px_-8px_rgba(11,31,14,0.10)] backdrop-blur-lg sm:mx-[20px] md:mt-0 md:top-4 ${
+    <header
+      className={`top-3 z-50 mt-3 mx-[12px] rounded-2xl bg-background/70 shadow-[0_8px_24px_-8px_rgba(11,31,14,0.10)] backdrop-blur-lg transition-[transform,opacity] duration-[350ms] ease-out sm:mx-[20px] md:mt-0 md:top-4 ${
         isHome ? "sticky lg:fixed lg:inset-x-0" : "sticky"
-      }`}
+      } ${hideForHero ? "lg:pointer-events-none lg:-translate-y-24 lg:opacity-0" : ""}`}
     >
       <div className="flex items-center justify-between gap-4 px-6 py-4">
         <div className="flex items-center gap-10">
@@ -175,6 +157,6 @@ export function SiteHeader() {
           </div>
         </div>
       )}
-    </motion.header>
+    </header>
   );
 }
