@@ -48,20 +48,19 @@ export default function AboutPage() {
     <div className="flex flex-col">
 
       {/* ── Hero ── */}
-      <section className="relative mx-[12px] mt-8 mb-6 overflow-hidden rounded-3xl bg-[radial-gradient(150%_140%_at_15%_15%,var(--brand-deep-green)_0%,var(--brand-forest)_55%)] px-8 py-20 sm:mx-[20px] sm:px-14 sm:py-28">
-        <div aria-hidden className="pointer-events-none absolute -top-24 -right-24 h-72 w-72 rounded-full bg-brand-mint/20 blur-3xl" />
-        <div aria-hidden className="pointer-events-none absolute -bottom-32 left-1/3 h-80 w-80 rounded-full bg-brand-mint/10 blur-3xl" />
-        <div className="relative mx-auto max-w-5xl text-center">
+      <section className="relative mx-[12px] mt-8 mb-6 overflow-hidden rounded-3xl bg-neutral-800 px-8 py-20 sm:mx-[20px] sm:px-14 sm:py-28">
+        <div className="relative mx-auto max-w-7xl">
+          <div className="max-w-xl text-left">
           <p className="font-serif text-2xl text-brand-mint italic sm:text-3xl">
             Our mission
           </p>
-          <h1 className="mt-3 font-display text-4xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl">
+          <h1 className="mt-3 font-display text-4xl font-semibold leading-tight text-white sm:text-5xl">
             No one should lose their life to a bill.
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-white/70 sm:text-xl">
+          <p className="mt-6 text-base leading-relaxed text-white/70">
             FundPatients is a Nigerian medical crowdfunding platform that connects patients facing urgent healthcare costs with a community of donors — transparently, safely, and with dignity.
           </p>
-          <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <div className="mt-10 flex flex-col items-start gap-3 sm:flex-row">
             <Link
               href="/stories"
               className="w-full rounded-full bg-brand-mint px-6 py-3 text-center font-medium text-brand-forest transition hover:bg-white sm:w-auto"
@@ -74,6 +73,7 @@ export default function AboutPage() {
             >
               Become a partner
             </Link>
+          </div>
           </div>
         </div>
       </section>
