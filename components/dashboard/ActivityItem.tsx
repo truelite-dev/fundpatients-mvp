@@ -49,17 +49,17 @@ function thankYouTime(dateStr: string) {
 function ThankYouBanner({ item, caseTitle }: { item: Item; caseTitle?: string }) {
   return (
     <li className="py-3">
-      <div className="flex items-start gap-4 rounded-2xl bg-[#14AE9D] p-4">
-        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#FFE8A6] text-[#C26A00]">
+      <div className="flex items-start gap-4 rounded-2xl bg-brand-soft-sage p-4">
+        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white text-brand-deep-green">
           <Gift className="h-6 w-6" />
         </span>
         <div className="min-w-0 flex-1">
-          <p className="text-sm font-bold text-white sm:text-base">
+          <p className="text-sm font-bold text-brand-forest sm:text-base">
             <Headline item={item} />
           </p>
-          {caseTitle && <p className="mt-1 text-sm font-semibold text-brand-forest">{caseTitle}</p>}
+          {caseTitle && <p className="mt-1 text-sm font-semibold text-brand-deep-green">{caseTitle}</p>}
         </div>
-        <span className="shrink-0 text-xs text-brand-forest/70 sm:text-sm">{thankYouTime(item.createdAt)}</span>
+        <span className="shrink-0 text-xs text-brand-muted-sage sm:text-sm">{thankYouTime(item.createdAt)}</span>
       </div>
     </li>
   );
