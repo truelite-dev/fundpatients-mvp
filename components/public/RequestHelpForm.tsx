@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { inputClass } from "@/lib/formStyles";
 
 const currencies = ["NGN", "USD", "EUR"] as const;
 
@@ -50,7 +51,7 @@ export function RequestHelpForm() {
           How much do you need to raise?*
           <div className="flex gap-2">
             <select
-              className="rounded-md border border-border px-3 py-2"
+              className={inputClass}
               value={form.currency}
               onChange={(e) =>
                 setForm({ ...form, currency: e.target.value as (typeof currencies)[number] })
@@ -68,7 +69,7 @@ export function RequestHelpForm() {
               min={1}
               step="0.01"
               placeholder="0.00"
-              className="flex-1 rounded-md border border-border px-3 py-2"
+              className={`flex-1 ${inputClass}`}
               value={form.goalAmount}
               onChange={(e) => setForm({ ...form, goalAmount: e.target.value })}
             />
@@ -79,7 +80,7 @@ export function RequestHelpForm() {
           Who will be the beneficiary of the funds?*
           <input
             required
-            className="rounded-md border border-border px-3 py-2"
+            className={inputClass}
             value={form.beneficiaryName}
             onChange={(e) => setForm({ ...form, beneficiaryName: e.target.value })}
           />
@@ -93,7 +94,7 @@ export function RequestHelpForm() {
           Your name in full*
           <input
             required
-            className="rounded-md border border-border px-3 py-2"
+            className={inputClass}
             value={form.requesterName}
             onChange={(e) => setForm({ ...form, requesterName: e.target.value })}
           />
@@ -104,7 +105,7 @@ export function RequestHelpForm() {
             required
             type="tel"
             placeholder="+234 000 000 0000"
-            className="rounded-md border border-border px-3 py-2"
+            className={inputClass}
             value={form.requesterPhone}
             onChange={(e) => setForm({ ...form, requesterPhone: e.target.value })}
           />
@@ -114,7 +115,7 @@ export function RequestHelpForm() {
           <input
             required
             type="email"
-            className="rounded-md border border-border px-3 py-2"
+            className={inputClass}
             value={form.requesterEmail}
             onChange={(e) => setForm({ ...form, requesterEmail: e.target.value })}
           />

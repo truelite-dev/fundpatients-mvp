@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import { inputClass } from "@/lib/formStyles";
 
 export default function ResetPasswordPage() {
   const router = useRouter();
@@ -68,7 +69,7 @@ export default function ResetPasswordPage() {
             required
             minLength={6}
             type="password"
-            className="rounded-md border border-border px-3 py-2"
+            className={inputClass}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />

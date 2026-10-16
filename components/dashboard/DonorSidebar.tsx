@@ -31,7 +31,7 @@ export function DonorSidebar({ donor }: { donor: Donor }) {
       <Link
         href={href}
         aria-current={active ? "page" : undefined}
-        className={`flex shrink-0 items-center gap-3 rounded-xl px-4 py-2.5 text-sm font-medium transition ${
+        className={`flex shrink-0 grow items-center justify-center gap-3 rounded-xl px-4 py-2.5 text-sm font-medium transition lg:grow-0 lg:justify-start ${
           active
             ? "bg-brand-deep-green text-white"
             : "text-brand-forest hover:bg-brand-soft-sage"

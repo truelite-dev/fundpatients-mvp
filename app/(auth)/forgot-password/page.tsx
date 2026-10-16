@@ -3,6 +3,7 @@
 import { Suspense, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import { inputClass } from "@/lib/formStyles";
 
 function ForgotPasswordForm() {
   const linkInvalid = useSearchParams().get("error") === "link_invalid";
@@ -54,7 +55,7 @@ function ForgotPasswordForm() {
             <input
               required
               type="email"
-              className="rounded-md border border-border px-3 py-2"
+              className={inputClass}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />

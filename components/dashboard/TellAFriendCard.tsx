@@ -4,12 +4,17 @@ const message = encodeURIComponent("Help patients get the care they need — joi
 
 export function TellAFriendCard() {
   return (
-    <section className="rounded-3xl bg-brand-forest p-5 text-white sm:p-6">
-      <h2 className="font-display text-lg font-semibold">Tell a friend about FundPatients</h2>
-      <p className="mt-2 text-sm text-white/70">
+    <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand-forest from-45% to-[#1d5a28] p-5 text-white sm:p-6">
+      {/* Soft mint glow, same idea as the footer's. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -bottom-20 -right-16 h-56 w-56 rounded-full bg-brand-mint/25 blur-3xl"
+      />
+      <h2 className="relative font-display text-lg font-semibold">Tell a friend about FundPatients</h2>
+      <p className="relative mt-2 text-sm text-white/70">
         Every share helps a patient reach their goal faster.
       </p>
-      <div className="mt-4 flex gap-2">
+      <div className="relative mt-4 flex gap-2">
         <a
           href={`https://twitter.com/intent/tweet?text=${message}`}
           target="_blank"

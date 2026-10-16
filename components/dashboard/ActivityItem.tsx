@@ -36,11 +36,38 @@ function Headline({ item }: { item: Item }) {
     case "admin":
       return <strong>Admin</strong>;
     case "thank-you":
-      return <>Thank you! Your donation of {amount} was received.</>;
+      return <>Thank you! Your donation of {amount} was received{item.anonymous ? " anonymously" : "."}</>;
   }
 }
 
-export function ActivityItem({ item }: { item: Item }) {
+// "Yesterday" for 24-48h, otherwise the usual relative time.
+function thankYouTime(dateStr: string) {
+  const hours = (Date.now() - new Date(dateStr).getTime()) / 3_600_000;
+  return hours >= 24 && hours < 48 ? "Yesterday" : formatRelativeTime(dateStr);
+}
+
+function ThankYouBanner({ item, caseTitle }: { item: Item; caseTitle?: string }) {
+  return (
+    <li className="py-3">
+      <div className="flex items-start gap-4 rounded-2xl bg-[#14AE9D] p-4">
+        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#FFE8A6] text-[#C26A00]">
+          <Gift className="h-6 w-6" />
+        </span>
+        <div className="min-w-0 flex-1">
+          <p className="text-sm font-bold text-white sm:text-base">
+            <Headline item={item} />
+          </p>
+          {caseTitle && <p className="mt-1 text-sm font-semibold text-brand-forest">{caseTitle}</p>}
+        </div>
+        <span className="shrink-0 text-xs text-brand-forest/70 sm:text-sm">{thankYouTime(item.createdAt)}</span>
+      </div>
+    </li>
+  );
+}
+
+export function ActivityItem({ item, caseTitle }: { item: Item; caseTitle?: string }) {
+  if (item.type === "thank-you") return <ThankYouBanner item={item} caseTitle={caseTitle} />;
+
   const Icon = icons[item.type];
 
   return (

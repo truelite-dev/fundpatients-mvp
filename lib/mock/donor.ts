@@ -17,6 +17,7 @@ export type ActivityItem = {
   id: string;
   type: ActivityItemType;
   actor: string;
+  anonymous?: boolean;
   amount?: number;
   currency?: string;
   body?: string;
@@ -28,6 +29,13 @@ export type ActivityGroup = {
   caseTitle: string;
   caseHref: string;
   isNew?: boolean;
+  // Filled from the real case by getDonorActivity (the mock groups don't carry it).
+  caseId?: string;
+  caseExcerpt?: string;
+  coverImageUrl?: string | null;
+  goalAmount?: number;
+  amountRaised?: number;
+  currency?: string;
   items: ActivityItem[];
 };
 
@@ -59,7 +67,6 @@ export const mockActivity: ActivityGroup[] = [
     caseHref: "/stories",
     isNew: true,
     items: [
-      { id: "g1-1", type: "thank-you", actor: "FundPatients", amount: 100_000, currency: "NGN", createdAt: ago(25) },
       { id: "g1-2", type: "comment", actor: "Drakes Lemon", body: "I know Jennifer, I pray for speedy recovery. Amen.", createdAt: ago(90) },
       { id: "g1-3", type: "admin", actor: "Admin", body: "Surgery completed and successful.", createdAt: ago(3 * 60) },
       { id: "g1-4", type: "follow", actor: "James Diko", createdAt: ago(5 * 60) },
@@ -70,6 +77,7 @@ export const mockActivity: ActivityGroup[] = [
     caseTitle: "Lung Collapse",
     caseHref: "/stories",
     items: [
+      { id: "g2-0", type: "thank-you", actor: "FundPatients", anonymous: true, amount: 50_000, currency: "NGN", createdAt: ago(DAY) },
       { id: "g2-1", type: "donation", actor: "Anonymous", amount: 50_000, currency: "NGN", createdAt: ago(2 * DAY) },
       { id: "g2-2", type: "donation", actor: "Adeola", amount: 20_000, currency: "NGN", createdAt: ago(6 * DAY) },
       { id: "g2-3", type: "comment", actor: "Renike James", body: "Please help her.", createdAt: ago(7 * DAY) },

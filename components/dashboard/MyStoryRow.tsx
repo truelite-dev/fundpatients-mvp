@@ -12,7 +12,7 @@ export function MyStoryRow({ story }: { story: MyStory }) {
   const funded = left === 0;
 
   return (
-    <li className="flex flex-col gap-4 py-4 sm:flex-row sm:items-center">
+    <li className="flex flex-col gap-4 py-6 sm:flex-row sm:items-center">
       <Link
         href={`/stories/${story.id}`}
         className="relative block h-32 w-full shrink-0 overflow-hidden rounded-2xl sm:h-20 sm:w-28"
