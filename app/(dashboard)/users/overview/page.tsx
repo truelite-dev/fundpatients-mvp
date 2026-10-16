@@ -9,7 +9,7 @@ export default async function OverviewPage() {
   const groups = await getDonorActivity();
 
   return (
-    <div className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_300px] xl:items-start">
+    <div className="grid gap-4 min-[1100px]:grid-cols-[minmax(0,1fr)_300px] min-[1100px]:items-start">
       <Reveal>
         <UpdatesFeed groups={groups} />
       </Reveal>

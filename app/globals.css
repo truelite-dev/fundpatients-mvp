@@ -47,7 +47,7 @@ input[type="radio"] {
 @layer base {
   h1,
   h2 {
-    letter-spacing: -0.075rem;
+    letter-spacing: -0.02em;
   }
 
   h1 {

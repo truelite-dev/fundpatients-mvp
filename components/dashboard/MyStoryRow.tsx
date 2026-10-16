@@ -3,6 +3,7 @@ import Image from "next/image";
 import { CheckCircle2, Star } from "lucide-react";
 import { CasePlaceholder } from "@/components/public/CasePlaceholder";
 import { formatCurrency } from "@/lib/formatCurrency";
+import { fundingBarClass } from "@/lib/fundingStage";
 import type { MyStory } from "@/lib/donor";
 
 export function MyStoryRow({ story }: { story: MyStory }) {
@@ -42,7 +43,7 @@ export function MyStoryRow({ story }: { story: MyStory }) {
           )}
         </div>
         <div className="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-brand-soft-sage">
-          <div className="h-full bg-brand-deep-green" style={{ width: `${percent}%` }} />
+          <div className={`h-full ${fundingBarClass(percent)}`} style={{ width: `${percent}%` }} />
         </div>
         <p className="mt-1 text-xs text-brand-muted-sage">
           {formatCurrency(left, story.currency)} left of {formatCurrency(story.goal_amount, story.currency)}

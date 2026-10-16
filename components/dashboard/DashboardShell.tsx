@@ -5,8 +5,8 @@ import type { Donor } from "@/lib/donor";
 
 export function DashboardShell({ donor, children }: { donor: Donor; children: React.ReactNode }) {
   return (
-    <div className="mx-[12px] mb-6 mt-4 grid grid-cols-[minmax(0,1fr)] gap-4 sm:mx-[20px] lg:grid-cols-[260px_minmax(0,1fr)] lg:items-start">
-      <Reveal className="lg:sticky lg:top-24">
+    <div className="mx-[12px] mb-6 mt-4 grid md:mt-8 grid-cols-[minmax(0,1fr)] gap-4 sm:mx-[20px] lg:grid-cols-[260px_minmax(0,1fr)] lg:items-start">
+      <Reveal className="lg:sticky lg:top-[106px]">
         {/* useSearchParams in the sidebar needs a Suspense boundary. */}
         <Suspense fallback={null}>
           <DonorSidebar donor={donor} />

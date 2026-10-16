@@ -45,7 +45,7 @@ export function DonorSidebar({ donor }: { donor: Donor }) {
 
   return (
     <aside className="flex flex-col gap-4">
-      <div className="rounded-3xl bg-gradient-to-b from-brand-soft-sage to-white p-5 sm:p-6">
+      <div className="rounded-3xl bg-gradient-to-b from-brand-soft-sage to-white px-3 pb-3 pt-5 shadow-[0_4px_16px_-8px_rgba(11,31,14,0.12)] sm:pt-6 lg:pb-6">
         <div className="flex flex-col items-center gap-1 text-center">
           <div
             aria-hidden
@@ -63,7 +63,7 @@ export function DonorSidebar({ donor }: { donor: Donor }) {
 
         <nav
           aria-label="Dashboard"
-          className="mt-5 flex gap-1 overflow-x-auto rounded-2xl bg-white p-2 lg:flex-col lg:overflow-visible"
+          className="mt-5 flex gap-1 overflow-x-auto rounded-2xl bg-white p-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:flex-col lg:overflow-visible"
         >
           {primaryNav.map((item) => (
             <NavLink key={item.href} {...item} />
@@ -74,7 +74,7 @@ export function DonorSidebar({ donor }: { donor: Donor }) {
           ))}
         </nav>
 
-        <div className="mt-5 hidden text-xs text-brand-muted-sage lg:block">
+        <div className="mt-5 hidden px-3 text-xs text-brand-muted-sage lg:block">
           <p>© 2026 FundPatients. All Rights Reserved.</p>
           <p className="mt-1 flex gap-2 text-brand-deep-green">
             <Link href="/about" className="hover:underline">About us</Link>
