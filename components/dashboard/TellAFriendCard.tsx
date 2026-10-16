@@ -4,7 +4,7 @@ const message = encodeURIComponent("Help patients get the care they need — joi
 
 export function TellAFriendCard() {
   return (
-    <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand-forest from-45% to-[#1d5a28] p-5 text-white sm:p-6">
+    <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand-forest from-45% to-brand-deep-green p-5 text-white sm:p-6">
       {/* Soft mint glow, same idea as the footer's. */}
       <div
         aria-hidden="true"
