@@ -141,7 +141,7 @@ export function DashboardHeader({ donor }: { donor: Donor }) {
   const storiesActive = pathname.startsWith("/stories") || pathname === "/users/stories";
 
   return (
-    <header className="sticky top-3 z-50 mx-[12px] mt-3 rounded-2xl bg-background/70 shadow-[0_8px_24px_-8px_rgba(11,31,14,0.10)] backdrop-blur-lg sm:mx-[20px] md:top-4 md:mt-0">
+    <header className="sticky top-3 z-50 mx-[12px] mt-3 rounded-2xl bg-background/70 shadow-[0_4px_16px_-8px_rgba(11,31,14,0.08)] backdrop-blur-lg sm:mx-[20px] md:top-4 md:mt-0">
       <div className="flex items-center justify-between gap-4 px-6 py-4">
         <div className="flex items-center gap-10">
           <Link href="/users/overview" className="shrink-0" onClick={() => setMobileOpen(false)}>

@@ -52,7 +52,7 @@ export function DonationsOverview({
               donated a total of:
             </p>
           )}
-          <p className="mt-3 font-display text-3xl font-semibold text-brand-deep-green sm:text-4xl">
+          <p className="mt-3 font-display text-3xl font-semibold text-brand-forest sm:text-4xl">
             {formatCurrency(summary.totalPaid, summary.currency)}
           </p>
           {summary.pendingCount > 0 && (

@@ -22,7 +22,7 @@ export default async function DonationsPage({
   const [summary, donations] = await Promise.all([getDonationSummary(), getDonations()]);
 
   return (
-    <div className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_300px] xl:items-start">
+    <div className="grid gap-4 min-[1100px]:grid-cols-[minmax(0,1fr)_300px] min-[1100px]:items-start">
       <Reveal className="rounded-3xl bg-white p-5 sm:p-8">
         <h1 className="font-display text-2xl font-semibold text-brand-forest">My Donations</h1>
         <p className="mt-1 text-sm text-brand-muted-sage">Manage your contributions</p>
