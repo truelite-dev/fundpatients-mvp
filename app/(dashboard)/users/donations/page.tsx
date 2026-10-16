@@ -22,12 +22,12 @@ export default async function DonationsPage({
   const [summary, donations] = await Promise.all([getDonationSummary(), getDonations()]);
 
   return (
-    <div className="grid gap-4 min-[1100px]:grid-cols-[minmax(0,1fr)_300px] min-[1100px]:items-start">
+    <div className="grid grid-cols-[minmax(0,1fr)] gap-4 min-[1100px]:grid-cols-[minmax(0,1fr)_300px] min-[1100px]:items-start">
       <Reveal className="rounded-3xl bg-white p-5 sm:p-8">
         <h1 className="font-display text-2xl font-semibold text-brand-forest">My Donations</h1>
         <p className="mt-1 text-sm text-brand-muted-sage">Manage your contributions</p>
 
-        <nav aria-label="Donations" className="mt-5 inline-flex rounded-full bg-brand-soft-sage p-1">
+        <nav aria-label="Donations" className="mt-5 inline-flex rounded-full bg-neutral-100 p-1">
           {tabs.map((t) => (
             <Link
               key={t.value}

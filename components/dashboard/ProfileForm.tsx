@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { Check, LogOut, Pencil, X } from "lucide-react";
 import { LogoutButton } from "@/components/dashboard/LogoutButton";
 import type { Profile } from "@/lib/donor";
+import { inputClass } from "@/lib/formStyles";
 
 const MAX_PHOTO_BYTES = 2 * 1024 * 1024;
 
@@ -37,8 +38,8 @@ function validate(p: Profile): Errors {
   return e;
 }
 
-const inputClass =
-  "w-full rounded-xl border px-4 py-2.5 text-sm text-brand-forest outline-none transition placeholder:text-brand-muted-sage/70 disabled:cursor-default disabled:border-transparent disabled:bg-gray-100 enabled:border-border enabled:bg-white enabled:focus:border-brand-deep-green";
+// Login-style field; the disabled (read-only) state keeps the profile's grey fill.
+const fieldClass = `w-full ${inputClass} text-sm text-brand-forest disabled:cursor-default disabled:border-transparent disabled:bg-gray-100`;
 
 function Field({
   id,
@@ -228,7 +229,7 @@ export function ProfileForm({ initial }: { initial: Profile }) {
               aria-invalid={!!errors.firstName}
               aria-describedby={errors.firstName ? "firstName-error" : undefined}
               autoComplete="given-name"
-              className={inputClass}
+              className={fieldClass}
             />
           </Field>
           <Field id="lastName" label="Last Name" required error={errors.lastName}>
@@ -240,7 +241,7 @@ export function ProfileForm({ initial }: { initial: Profile }) {
               aria-invalid={!!errors.lastName}
               aria-describedby={errors.lastName ? "lastName-error" : undefined}
               autoComplete="family-name"
-              className={inputClass}
+              className={fieldClass}
             />
           </Field>
         </div>
@@ -254,7 +255,7 @@ export function ProfileForm({ initial }: { initial: Profile }) {
               value={view.bio}
               onChange={(e) => setDraft((d) => ({ ...d, bio: e.target.value }))}
               placeholder={editing ? "Tell us a little about yourself" : "No biography added"}
-              className={inputClass}
+              className={fieldClass}
             />
           </Field>
           <Field id="email" label="Email address" required error={errors.email}>
@@ -267,7 +268,7 @@ export function ProfileForm({ initial }: { initial: Profile }) {
               aria-invalid={!!errors.email}
               aria-describedby={errors.email ? "email-error" : undefined}
               autoComplete="email"
-              className={inputClass}
+              className={fieldClass}
             />
           </Field>
         </div>
@@ -289,7 +290,7 @@ export function ProfileForm({ initial }: { initial: Profile }) {
                   placeholder={placeholder}
                   aria-invalid={!!errors[key]}
                   aria-describedby={errors[key] ? `${key}-error` : undefined}
-                  className={inputClass}
+                  className={fieldClass}
                 />
               ) : (
                 <p id={key} className={`rounded-xl bg-gray-100 px-4 py-2.5 text-sm ${saved.social[key] ? "text-brand-forest" : "text-brand-muted-sage"}`}>

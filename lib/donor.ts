@@ -68,8 +68,32 @@ export async function getDonorSession(): Promise<Donor> {
   };
 }
 
+// Mock activity over real published cases (same approach as getMyStories) so each
+// group shows a real title, cover and funding progress.
 export async function getDonorActivity(): Promise<ActivityGroup[]> {
-  return mockActivity;
+  const cases = await listPublishedCases();
+  return mockActivity.map((group, i) => {
+    const c = cases[i];
+    if (!c) return group;
+    return {
+      ...group,
+      caseTitle: c.title,
+      caseHref: `/stories/${c.id}`,
+      caseId: c.id,
+      caseExcerpt: c.description?.slice(0, 200),
+      coverImageUrl: c.cover_image_url,
+      goalAmount: c.goal_amount,
+      amountRaised: c.amount_raised,
+      currency: c.currency,
+    };
+  });
+}
+
+// Published stories that aren't already in the activity feed.
+export async function getRecommendedStories(limit = 8): Promise<CaseSummary[]> {
+  const cases = await listPublishedCases();
+  const shown = new Set(mockActivity.map((_, i) => cases[i]?.id));
+  return cases.filter((c) => !shown.has(c.id)).slice(0, limit);
 }
 
 export type TopDonationsPeriod = "today" | "week" | "month" | "all";

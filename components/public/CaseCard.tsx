@@ -11,10 +11,13 @@ export function CaseCard({
   case: c,
   recurring,
   className,
+  compact,
 }: {
   case: CaseSummary;
   recurring?: boolean;
   className?: string;
+  /** Denser variant for strips inside the dashboard: smaller title, no excerpt. */
+  compact?: boolean;
 }) {
   const percent = Math.min(100, Math.round((c.amount_raised / c.goal_amount) * 100));
   const amountLeft = Math.max(0, c.goal_amount - c.amount_raised);
@@ -57,11 +60,13 @@ export function CaseCard({
 
       <div className="flex flex-1 flex-col gap-3 p-4">
         <Link href={`/stories/${c.id}`}>
-          <h3 className="font-display text-lg leading-snug font-semibold text-brand-forest line-clamp-2 group-hover:text-brand-deep-green">
+          <h3
+            className={`font-display leading-snug font-semibold text-brand-forest line-clamp-2 group-hover:text-brand-deep-green ${compact ? "text-base" : "text-lg"}`}
+          >
             {c.title}
           </h3>
         </Link>
-        <p className="line-clamp-2 text-sm text-brand-muted-sage">{c.description}</p>
+        {!compact && <p className="line-clamp-2 text-sm text-brand-muted-sage">{c.description}</p>}
 
         <div className="h-1.5 w-full overflow-hidden rounded-full bg-brand-soft-sage">
           <div className="h-full bg-brand-deep-green" style={{ width: `${percent}%` }} />

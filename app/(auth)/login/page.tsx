@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { safeNext } from "@/lib/auth/safeNext";
+import { inputClass } from "@/lib/formStyles";
 
 function LoginForm() {
   const router = useRouter();
@@ -61,7 +62,7 @@ function LoginForm() {
           <input
             required
             type="email"
-            className="rounded-md border border-border px-3 py-2"
+            className={inputClass}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -71,7 +72,7 @@ function LoginForm() {
           <input
             required
             type="password"
-            className="rounded-md border border-border px-3 py-2"
+            className={inputClass}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />

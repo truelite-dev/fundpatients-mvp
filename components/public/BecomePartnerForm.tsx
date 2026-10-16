@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { inputClass } from "@/lib/formStyles";
 
 const initialForm = {
   name: "",
@@ -45,7 +46,7 @@ export function BecomePartnerForm() {
         Name of the Organization*
         <input
           required
-          className="rounded-md border border-border px-3 py-2"
+          className={inputClass}
           value={form.name}
           onChange={(e) => setForm({ ...form, name: e.target.value })}
         />
@@ -55,7 +56,7 @@ export function BecomePartnerForm() {
         <input
           required
           type="email"
-          className="rounded-md border border-border px-3 py-2"
+          className={inputClass}
           value={form.contactEmail}
           onChange={(e) => setForm({ ...form, contactEmail: e.target.value })}
         />
@@ -64,7 +65,7 @@ export function BecomePartnerForm() {
         Contact phone number
         <input
           type="tel"
-          className="rounded-md border border-border px-3 py-2"
+          className={inputClass}
           value={form.contactPhone}
           onChange={(e) => setForm({ ...form, contactPhone: e.target.value })}
         />
@@ -73,7 +74,7 @@ export function BecomePartnerForm() {
         Health specialisation*
         <input
           required
-          className="rounded-md border border-border px-3 py-2"
+          className={inputClass}
           value={form.specialization}
           onChange={(e) => setForm({ ...form, specialization: e.target.value })}
         />
@@ -85,7 +86,7 @@ export function BecomePartnerForm() {
           type="number"
           min={1800}
           max={new Date().getFullYear()}
-          className="rounded-md border border-border px-3 py-2"
+          className={inputClass}
           value={form.yearEstablished}
           onChange={(e) => setForm({ ...form, yearEstablished: e.target.value })}
         />
@@ -93,7 +94,7 @@ export function BecomePartnerForm() {
       <label className="flex flex-col gap-1 text-sm">
         Reason for Joining
         <textarea
-          className="rounded-md border border-border px-3 py-2"
+          className={inputClass}
           rows={4}
           value={form.reason}
           onChange={(e) => setForm({ ...form, reason: e.target.value })}
