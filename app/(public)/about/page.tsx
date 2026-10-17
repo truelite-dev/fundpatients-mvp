@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Heart, ShieldCheck, Users, TrendingUp, ArrowRight, Quote } from "lucide-react";
 import { Reveal } from "@/components/motion/Reveal";
+import { team } from "@/lib/team";
 
 export const metadata = { title: "About | FundPatients" };
 
@@ -35,6 +36,9 @@ const values = [
   },
 ];
 
+// Second founder voice under the main pull-quote (placeholder team content in lib/team.ts).
+const coFounder = team.find((m) => m.slug === "tunde-bello");
+
 const milestones = [
   { year: "2021", event: "FundPatients founded after a personal experience with medical fundraising in Lagos." },
   { year: "2022", event: "First 100 cases funded. Partnered with 8 hospitals across Lagos and Abuja." },
@@ -48,28 +52,53 @@ export default function AboutPage() {
     <div className="flex flex-col">
 
       {/* ── Hero ── */}
-      <section className="relative mx-[12px] mt-8 mb-6 overflow-hidden rounded-3xl bg-neutral-800 px-8 py-20 sm:mx-[20px] sm:px-14 sm:py-28">
+      <section className="relative mx-[12px] mt-4 md:mt-8 mb-6 overflow-hidden rounded-3xl border border-border bg-neutral-100 px-8 py-20 sm:mx-[20px] sm:px-14 sm:py-28 lg:min-h-[590px]">
+        <Image
+          src="/images/hero/office-hero-bg.jpeg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        {/* Slight brand-green tint over the photo. */}
+        <div aria-hidden="true" className="absolute inset-0 bg-brand-deep-green/10 mix-blend-multiply" />
+        {/* Keeps the dark text readable where it overlaps the photo on narrow screens. */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/60 to-white/0 sm:from-white/50 sm:via-white/0"
+        />
+        {/* Cut-out portrait pinned to the hero's base; fixed size, hidden below lg; the text column narrows to make room for it. */}
+        <Image
+          src="/images/hero/lady-hero-bg.png"
+          alt=""
+          width={851}
+          height={1080}
+          priority
+          sizes="(min-width: 1024px) 425px, 0px"
+          className="pointer-events-none absolute bottom-0 right-[3%] hidden h-[540px] w-auto max-w-none select-none lg:block"
+        />
         <div className="relative mx-auto max-w-7xl">
-          <div className="max-w-xl text-left">
-          <p className="font-serif text-2xl text-brand-mint italic sm:text-3xl">
+          <div className="max-w-xl text-left lg:max-w-[min(36rem,calc(100%-460px))]">
+          <p className="font-serif text-2xl text-brand-deep-green italic sm:text-3xl">
             Our mission
           </p>
-          <h1 className="mt-3 font-display text-4xl font-semibold leading-tight text-white sm:text-5xl">
+          <h1 className="mt-3 font-display text-4xl font-semibold leading-tight text-brand-forest sm:text-5xl">
             No one should lose their life to a bill.
           </h1>
-          <p className="mt-6 text-base leading-relaxed text-white/70">
+          <p className="mt-6 text-base leading-relaxed text-brand-forest/80">
             FundPatients is a Nigerian medical crowdfunding platform that connects patients facing urgent healthcare costs with a community of donors — transparently, safely, and with dignity.
           </p>
           <div className="mt-10 flex flex-col items-start gap-3 sm:flex-row">
             <Link
               href="/stories"
-              className="w-full rounded-full bg-brand-mint px-6 py-3 text-center font-medium text-brand-forest transition hover:bg-white sm:w-auto"
+              className="w-full rounded-full bg-brand-deep-green px-6 py-3 text-center font-medium text-white transition hover:bg-brand-forest sm:w-auto"
             >
               See patient stories
             </Link>
             <Link
               href="/partners"
-              className="w-full rounded-full border border-white/30 px-6 py-3 text-center font-medium text-white transition hover:bg-white/10 sm:w-auto"
+              className="w-full rounded-full border border-brand-forest/30 bg-white/60 px-6 py-3 text-center font-medium text-brand-forest transition hover:bg-white sm:w-auto"
             >
               Become a partner
             </Link>
@@ -84,7 +113,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-2 gap-8 lg:grid-cols-4">
             {stats.map((s) => (
               <div key={s.label} className="text-center">
-                <p className="font-display text-3xl font-semibold text-brand-deep-green sm:text-4xl">{s.value}</p>
+                <p className="font-display text-[2rem] font-semibold text-brand-forest sm:text-[2.5rem]">{s.value}</p>
                 <p className="mt-1 text-sm text-brand-muted-sage">{s.label}</p>
               </div>
             ))}
@@ -94,7 +123,7 @@ export default function AboutPage() {
 
       {/* ── Our Story ── */}
       <Reveal>
-        <section className="mx-[12px] mb-6 overflow-hidden rounded-3xl bg-brand-soft-sage px-8 py-16 sm:mx-[20px] sm:px-14 sm:py-20">
+        <section className="mx-[12px] mb-6 overflow-hidden rounded-3xl bg-brand-soft-sage px-8 py-16 sm:mx-[20px] sm:px-14 sm:py-20 lg:py-28">
           <div className="mx-auto max-w-5xl lg:grid lg:grid-cols-2 lg:items-center lg:gap-16">
             <div>
               <p className="font-serif text-2xl text-brand-deep-green italic sm:text-3xl">Our story</p>
@@ -111,7 +140,7 @@ export default function AboutPage() {
                 FundPatients was the answer. We built it so that the next family wouldn&apos;t have to lose three weeks.
               </p>
             </div>
-            <div className="mt-10 lg:mt-0">
+            <div className="mt-10 flex flex-col gap-6 lg:mt-0">
               {/* Pullquote */}
               <div className="rounded-2xl bg-white p-8 shadow-sm">
                 <Quote className="h-8 w-8 text-brand-mint" />
@@ -126,6 +155,23 @@ export default function AboutPage() {
                   </div>
                 </div>
               </div>
+              {coFounder && (
+                <div className="rounded-2xl bg-white p-8 shadow-sm">
+                  <Quote className="h-8 w-8 text-brand-mint" />
+                  <p className="mt-4 font-display text-xl font-semibold leading-snug text-brand-forest">
+                    &ldquo;{coFounder.quote}&rdquo;
+                  </p>
+                  <div className="mt-6 flex items-center gap-3">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-deep-green font-display text-sm font-semibold text-white">
+                      {coFounder.initials}
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-brand-forest">{coFounder.name}</p>
+                      <p className="text-xs text-brand-muted-sage">{coFounder.role}</p>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </section>
