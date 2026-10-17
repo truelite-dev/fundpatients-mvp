@@ -50,7 +50,7 @@ export function HeroCarousel({ cases }: { cases: CaseSummary[] }) {
     >
       {/* Homepage-only experiment: duplicate the site nav as a card-header.
           The real SiteHeader slides in once this hero card scrolls past. */}
-      <div className="relative hidden items-center justify-between gap-4 px-8 py-7 sm:px-14 lg:flex">
+      <div className="relative z-10 hidden items-center justify-between gap-4 px-8 py-7 sm:px-14 lg:flex">
         <div className="flex items-center gap-10">
           <Image
             src="/logos/logomark-lemon-whtetext.svg"
@@ -77,13 +77,13 @@ export function HeroCarousel({ cases }: { cases: CaseSummary[] }) {
           <Link
             href="/stories"
             aria-label="Search stories"
-            className="rounded-full border border-white/20 p-2 text-white/80 transition hover:border-white/40 hover:text-white"
+            className="rounded-full border border-white/20 bg-white/10 p-2 text-white/90 backdrop-blur-md transition hover:border-white/40 hover:bg-white/20 hover:text-white"
           >
             <Search className="h-4 w-4" />
           </Link>
           <Link
             href="/request-help"
-            className="rounded-full border border-white/20 px-4 py-2 text-white transition hover:bg-white/10"
+            className="rounded-full border border-white/20 bg-white/10 px-4 py-2 text-white backdrop-blur-md transition hover:bg-white/20"
           >
             Request Help
           </Link>
@@ -95,7 +95,7 @@ export function HeroCarousel({ cases }: { cases: CaseSummary[] }) {
           </Link>
           <Link
             href="/login"
-            className="rounded-full border border-white/20 px-4 py-2 text-white transition hover:bg-white/10"
+            className="rounded-full border border-white/20 bg-white/10 px-4 py-2 text-white backdrop-blur-md transition hover:bg-white/20"
           >
             Login
           </Link>
@@ -110,6 +110,11 @@ export function HeroCarousel({ cases }: { cases: CaseSummary[] }) {
         aria-hidden
         className="pointer-events-none absolute -bottom-32 left-1/3 h-80 w-80 rounded-full bg-brand-mint/10 blur-3xl"
       />
+      {/* Dot-grid vignette (same as the Team hero): dense at the edges, fades out behind the text. */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-[0.7] [background-image:radial-gradient(circle_at_center,var(--brand-mint)_0.55px,transparent_0.9px)] [background-size:11px_11px] [mask-image:radial-gradient(ellipse_75%_75%_at_50%_50%,transparent_28%,black_100%)] [-webkit-mask-image:radial-gradient(ellipse_75%_75%_at_50%_50%,transparent_28%,black_100%)]"
+      />
 
       <div className="relative mx-auto flex w-full max-w-[1250px] flex-col items-center gap-12 px-5 py-10 sm:px-14 sm:py-20 lg:flex-row lg:justify-between">
         <motion.div
@@ -119,7 +124,7 @@ export function HeroCarousel({ cases }: { cases: CaseSummary[] }) {
           transition={{ duration: 0.7, ease: "easeOut" }}
         >
           <h1 className="font-display text-shadow-lg text-shadow-black/15 text-4xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl">
-            Don&apos;t Let Finances
+            Don&apos;t Let <span className="font-serif font-medium italic text-brand-mint">Finances</span>
             <br />
             Limit Your Fight.
           </h1>
