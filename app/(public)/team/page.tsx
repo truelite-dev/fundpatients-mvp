@@ -22,7 +22,7 @@ export default function TeamPage() {
   return (
     <div className="flex flex-col">
       {/* ── Hero ── */}
-      <section className="relative mx-[12px] mt-8 mb-6 overflow-hidden rounded-3xl bg-[color-mix(in_srgb,var(--brand-forest)_70%,var(--brand-deep-green))] px-8 py-20 sm:mx-[20px] sm:px-14 sm:py-28">
+      <section className="relative mx-[12px] mt-4 md:mt-8 mb-6 overflow-hidden rounded-3xl bg-[color-mix(in_srgb,var(--brand-forest)_70%,var(--brand-deep-green))] px-8 py-20 sm:mx-[20px] sm:px-14 sm:py-28">
         {/* Dot-grid vignette: dense at the edges, fades out behind the text. */}
         <div
           aria-hidden
